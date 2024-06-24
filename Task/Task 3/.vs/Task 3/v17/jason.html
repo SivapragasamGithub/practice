@@ -3,8 +3,10 @@
         <body>
             <script>
                 var obj1 = {name:"person1",age:20}
-                var obj2 = {age:20,Name:"person1"}
-                if (obj1 == obj2)
+                var obj2 = {age:20,name:"person1"}
+                for(let i in obj1)
+              {   console.log(i)
+                  if (obj1[i] == obj2[i])
                      {
                        console.log("Same")
                      }
@@ -12,6 +14,10 @@
                      {
                        console.log("Not same")
                      }
+                }
+
+            var x = function ()
+                
 
             </script>
         </body>
