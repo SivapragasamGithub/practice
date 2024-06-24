@@ -10,11 +10,17 @@
             xhr.open("GET","https://restcountries.eu/rest/v2/all",true);
             xhr.onload = function()
                 {
-                    if(xhr.status>=200 && xhr.status<300)
-                    {
-                        console.log(xhr.responseText)
-                        var response = JSON.parse(xhr.responseText);
-                        console.log(response);
+                    if(xhr.status>=200 && xhr.status<300){
+                    var response = JASON.parse(xhr.responseText);
+                console.log(response);
+                response.foreach((country)=> {
+                    console.log(country.name.common);
+                    console.log(country.flags.png);
+                    console.log( country.region,country.subregion);
+                    console.log(country.population);
+                });
+                    
+                        
                     
                     }
                     else{
