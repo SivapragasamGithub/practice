@@ -1,9 +1,0 @@
-Window Object
-The window object is a global object in client side javascript, representing browser window containing a DOM document and acting as the root of the document object model.
-The window object Supported by all browsers, represents the browser's and automatically includes global javascript objectS functions and variables as members
-The window object is responsible for managing GLOBAL VARIABLES functions and objects providing methods for browsers interaction and managing properties  related to frames tabs, or windows such 
-as alert() confirm(), settimeout(), and setInterval()
-
-Document Object 
-The Document object is the HTML document that appears in the browsers window and serves as an interating with the web Pages 
-content.the browser generates a document object model of a webpage upon loading it.
