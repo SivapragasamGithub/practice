@@ -7,6 +7,8 @@ Displaying webpages within the browser window
 Managing browser history and bookmarks
 Handling pop-up windows and alerts
 Interacting with external devices like printers
+
+
 The Document: The Play Itself
 
 Now, let's shift focus to the content displayed on the stage – the webpage itself. This is where the document object comes in. It represents the HTML structure of the webpage, including 
