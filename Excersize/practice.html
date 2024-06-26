@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // square each numbers in array
+    
+    const numbers = [1,2,3,4,5];
+    const squareNumbers = numbers.map(number=>number*number);
+    console.log(squareNumbers);
+    //output [1,4,9,16,25]
+
+    //convert an array of strings to Uppercase
+    const words = ['hello','world','javascript'];
+    const uppercasewords = words.map((word)=>word.toUppercase());
+    console.log(uppercasewords);
+
+    //Extract the name prperty from an array of objects
+    const users = [
+        {id:1, name : 'alice'};
+        {id:2, name : 'Bob'};
+        {id:3, name : 'Charlie'};
+    ];
+    const userNames = users.map((user)=>user.name);
+    console.log(userNames);
+
+    //Append a suffix to each string in an array:
+    const fileNames = ['report','summary','data'];
+    const updateFilenames = fileNames.map((fileName)=>fileName+'txt');
+    console.log(updateFilenames);
+
+    //Increament each number in an array by 1:
+    //const numbers = [1,2,3,4,5];
+   // const increamentedNumbers = numbers.map((number)=>number+1);
+
+
+    </script>
+</body>
+</html>
