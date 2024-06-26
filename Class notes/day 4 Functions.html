@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //normal function
+        function sayhello(){
+                console.log("welcome Vasanth")
+                console.log("how are you")
+            }
+
+            sayhello()
+            //passing parameters (here name is parameter) 
+            function sayhello(name){
+                console.log("welcome Vasanth",name)
+                console.log("how are you")
+            }
+
+            sayhello("vasanth")
+            sayhello("priya")
+            sayhello("hari")
+            
+
+            //another example for named function
+            function draw(x){
+                console.log("the value is",x,x**2);
+            }
+
+            draw(5);
+            draw(6);
+            draw(7);
+            draw(8);
+
+            //everytime we cannot type like this so we use for loop
+
+            function draw(x){
+                console.log("the value is",x,x**2);
+            }
+            //just for example
+            for(var i=2;i<=100;i++){
+                draw(i)
+            }
+
+            /*return concept
+            in previous command if take out console and return command means. 1st the code will start from below(calling function area).
+             after that the code will go to the function declared area then start run until line by line until return statement. 
+             after reach return statement that value will pass to function calling area(bottom of code)*/
+
+            function draw(x){
+                var result = x **2;
+                return result
+            }
+
+
+    </script> 
+</body>
+</html>
