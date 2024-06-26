@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> Agebasis output</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<body>
+    <script>
+        const people = [
+            {name:'Alice',age: 21},
+            {name:'Bob',age:25},
+            {name:'charlie',age:21},
+            {name:'David',age:25},
+            {name:'Edward',age:23}
+    ];
+    let Agebasisoutput = people.reduce((acc,cur)=>acc.concat(cur.age),[]);
+    console.log(Agebasisoutput);
+        
+    </script>
+</body>
+</html>
