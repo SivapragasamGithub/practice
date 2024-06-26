@@ -64,16 +64,15 @@
 
             //realtime example
             function calage(year){
-                //this code will give error when the program use in next year
-                var age = 2024-year;
+        //this code will give error when the program use in next year
+        //var age = 2024-year;
+        var currentyear = new Date().getFullYear()
+        var age = currentyear - year;
+        return age;
+    }
 
-                var age = new Date().getFullyear()-year;
-                return(age)
-            }
-
-            var person1age = calge(1988)
-            console.log(person1age)
-
+    var person1age = calage(1988)
+    console.log(person1age)
 
     </script> 
 </body>
