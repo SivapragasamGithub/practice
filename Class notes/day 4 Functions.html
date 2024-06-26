@@ -74,6 +74,55 @@
     var person1age = calage(1988)
     console.log(person1age)
 
+    //in function we can call multiple values
+    function add(val1,val2){
+        return val+val2
+    }
+    var addition = add(3,4);
+    console.log(addition)
+
+    //Anonymous function
+    var sub = function(val1,val2){
+        return val-val2
+    }
+    var res = sub(4,1);
+    console.log(res)
+
+    //immediately Invoke function or IIFE function
+    /*we open ()() then inside the 1st parameter i call a function and console it.so the second () will call the function immideately
+    here we cannot call the function using function name frequently. bcos there is no Function name to call*/
+    
+    (function(){
+        console.log("i am here")
+    })()
+
+    //Arrow function
+
+    var myfunction = (function(){
+
+    })
+
+    var myFunction = () =>{
+        return "hello"
+    }
+    var res = myFunction()
+    console.log(res)
+
+    //next exa
+    var add = (x) => {
+        return x**2;
+    }
+
+    var add = (x)=> x**2;
+
+    var add = x => x**2;
+    //if we call the function add and pass the value 3 means we will get 9 on console
+    add(3)
+
+    // Arrow function and anonymous will hoist
+    //named function will be hoist
+    
+
     </script> 
 </body>
 </html>
