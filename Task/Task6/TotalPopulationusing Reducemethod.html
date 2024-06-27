@@ -16,7 +16,7 @@
                         console.log(xhr.responseText)
                         var response = JSON.parse(xhr.responseText);
                         console.log(response);            
-                        let peoples= response.reduce((acc,population)=>acc+population,0);
+                        let peoples= response.reduce((acc,curr)=> acc +curr.population,0);
                         console.log(peoples);                     
                     }
                     else{
