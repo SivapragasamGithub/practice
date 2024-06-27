@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <Script>
+<body>Print the Countries Name, Capital, Flag Using Filter Method
+    <script>
         var xhr = new XMLHttpRequest();
             xhr.open("GET","https://restcountries.com/v3.1/all",true);
             xhr.onload = function()
@@ -15,9 +15,13 @@
                     {
                         console.log(xhr.responseText)
                         var response = JSON.parse(xhr.responseText);
-                        console.log(response);
-                       let display = response.filter((a)=> a.region== 'Asia')
-                        console.log(display);
+                        console.log(response); 
+                        response.forEach((country)=>{
+                           console.log(country.flag);
+                           console.log(country.name);
+                           console.log(country.capital);
+                           
+                        })
                     
                     }
                     else{
@@ -29,8 +33,6 @@
                     console.log("error");
                 }
             xhr.send();
-
-
-    </Script>
+    </script>
 </body>
 </html>
