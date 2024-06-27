@@ -16,8 +16,10 @@
                         console.log(xhr.responseText)
                         var response = JSON.parse(xhr.responseText);
                         console.log(response);
-                        let Todisplay = response.filter((a)=>a.continents === Asia)
-                        console.log(Todisplay);
+                        let display = response.filter((a)=>a.continents == Asia)
+                        console.log(display);
+                        let Peoples = response.filter((a)=> a.population);
+                        console.log(Peoples);
                         response.forEach((country)=>{
                            // console.log(country.flag);
                             
