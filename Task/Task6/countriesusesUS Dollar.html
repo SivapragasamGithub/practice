@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>  Countries That uses US Dollar as Currency
+    <Script>
+        var xhr = new XMLHttpRequest();
+            xhr.open("GET","https://restcountries.com/v3.1/all",true);
+            xhr.onload = function()
+                {
+                    if(xhr.status>=200 && xhr.status<300)
+                    {
+                        console.log(xhr.responseText)
+                        var response = JSON.parse(xhr.responseText);
+                        console.log(response);
+                       let display = response.filter((a)=> a.currencies === "United States dollar")
+                        console.log(display);
+                    
+                    }
+                    else{
+                        console.log("The request failed");
+                    }
+                };
+                xhr.onerror = function()
+                {
+                    console.log("error");
+                }
+            xhr.send();
+
+
+    </Script>
+</body>
+</html>
