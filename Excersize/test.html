@@ -14,8 +14,13 @@
             {name:'David',age:25},
             {name:'Edward',age:23}
     ];
-    let Agebasisoutput = people.reduce((acc,cur)=>acc.concat(cur.age),[]);
-    console.log(Agebasisoutput);
+    let age21 = people.filter((a)=>a.age ===21);
+    console.log(age21);
+    let age23 = people.filter((a)=>a.age ===23);
+    console.log(age23);
+    let age25 = people.filter((a)=> a.age ===25);
+    console.log(age25);
+
         
     </script>
 </body>
