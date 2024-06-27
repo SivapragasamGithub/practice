@@ -16,7 +16,7 @@
                         console.log(xhr.responseText)
                         var response = JSON.parse(xhr.responseText);
                         console.log(response);
-                       let display = response.filter((a)=> a.currencies === "United States dollar")
+                        let display = response.filter((a)=> a.currencies === 'USD')
                         console.log(display);
                     
                     }
