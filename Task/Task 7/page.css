@@ -1,0 +1,44 @@
+body {
+    padding: 0;;
+    margin: 0;
+}
+
+.menu{
+    height: 100px;
+    background-color: #2f3d46 ;
+    
+}
+.github-icon{
+    display: inline;
+    position: relative;
+    top: 15px;
+    left: 20px;
+}
+
+.heading{
+    display: inline;
+    left: 45%;
+    position: relative;
+    color: white;
+}
+
+.side{
+    width: 300px;
+    height: 500px;
+    background-color: #2f3d46 ;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 20px;
+    display: inline-block;
+}
+    
+.content{
+    width: 800px;
+    height: 200px;
+    background-color: #2f3d46 ;
+    margin-top: 15px;
+    margin-left: 15px;
+    border-radius: 20px;
+    display: inline-block;
+    
+}
