@@ -33,12 +33,18 @@ body {
 }
     
 .content{
-    width: 800px;
-    height: 200px;
-    background-color: #2f3d46 ;
-    margin-top: 15px;
-    margin-left: 15px;
+    width: 1000px;
+    height: 500px;
+    background-color: #2f3d46 ;    
     border-radius: 20px;
     display: inline-block;
     
+}
+.box{
+    width: 22%;
+    margin-top:15px;
+    margin-left: 15px;
+    height: 300px;
+    background-color: white;
+    display: inline-block;
 }
