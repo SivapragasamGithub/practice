@@ -1,0 +1,41 @@
+.title{
+    background-color: purple;
+    display: flex;
+    height: 80Px;
+    justify-content: center;
+    align-items: center;
+}
+.main{
+    background-color: whitesmoke;
+    display: flex;
+    width: 100%;
+    height: 500px;   
+    margin: 4PX;
+    justify-content: space-around;
+    
+}
+.first-article{
+    background-color: skyblue;
+    display: flex;
+    height: 490PX;
+    width: 350PX;
+    margin: 4PX;
+    align-items: center;
+}
+.second-article{
+    background-color: skyblue;
+    display: flex;
+    height: 490PX;
+    width: 350PX;
+    margin: 4PX;
+}
+.content{
+    background-color: skyblue;
+    display: flex;
+    height: 490PX;
+    width: 590PX;
+    margin: 4PX;
+}
+.FA{
+    align-items: flex-start;
+}
