@@ -20,14 +20,42 @@
     height: 490PX;
     width: 350PX;
     margin: 4PX;
-    align-items: center;
+    justify-content:flex-start;
+    margin-top: 5px;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.FA{
+    align-items: flex-start;
+    background-color: skyblue;
+    height: 30px;   
+    width: 100px;
+    margin: 2px;
+}
+.FA-content{
+    background-color: skyblue;
+    display: flex;
+    justify-content:end;
+    margin: 2px;
 }
 .second-article{
     background-color: skyblue;
     display: flex;
-    height: 490PX;
-    width: 350PX;
-    margin: 4PX;
+    height: 490px;
+    width: 350px;
+    margin: 4px;
+    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: column;    
+    margin-top: 5px;
+}
+.SA{
+   background-color: skyblue;
+   margin: 2px;
+}
+.SA-content{
+background-color: skyblue;
+margin: 2Px;
 }
 .content{
     background-color: skyblue;
@@ -35,7 +63,40 @@
     height: 490PX;
     width: 590PX;
     margin: 4PX;
-}
-.FA{
+    justify-content: flex-start;
     align-items: flex-start;
+    justify-content: space-between;
 }
+.smile{
+    background-color: lightgray;
+    height: 30px;
+    width: 65px;
+    border-radius:05px;
+    display: flex;
+    
+
+}
+.laugh{
+    background-color: lightgray;
+    height: 30px;
+    width: 65px;
+    border-radius:05px;
+
+}
+
+.wink{
+    background-color: lightgray;
+    height: 30px;
+    width: 65px;
+    border-radius:05px;
+
+}
+
+.srugh{
+    background-color: lightgray;
+    height: 30px;
+    width: 65px;
+    border-radius:05px;
+
+}
+
