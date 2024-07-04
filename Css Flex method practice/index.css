@@ -63,11 +63,32 @@ margin: 2Px;
     height: 490PX;
     width: 590PX;
     margin: 4PX;
-    justify-content: flex-start;
-    align-items: flex-start;
-    justify-content: space-between;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    justify-content: center;
+    align-content: flex-start;
+    /* align-items: flex-start; */
+    /* justify-content: space-around; */
 }
-.smile{
+.buttons{
+    background-color: brown;
+    /* width: 450px; */
+    /* height: 100px; */
+    /* justify-content: center; */
+    /* align-items: center;   */
+   
+}
+.blush{
+    width: 450px;
+
+}
+/* .button1{
+    background-color:blue;
+    width: 350px;
+    height: 100px;
+    } */
+    
+/* .smile{
     background-color: lightgray;
     height: 30px;
     width: 65px;
@@ -98,16 +119,4 @@ margin: 2Px;
     width: 65px;
     border-radius:05px;
 
-}
-.button {
-    background-color: #04AA6D;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: crosshair;
-  }
+} */
