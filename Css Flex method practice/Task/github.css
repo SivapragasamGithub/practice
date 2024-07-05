@@ -1,0 +1,106 @@
+.body{
+    background-color: #cad2c5;
+}
+.container{
+    background-color:#cad2c5 ;
+    height: auto;
+    width: 100%;
+}
+.content{
+    background-color: #2f3d46;
+    border-radius: 2px;
+    height: 100px;
+}
+.png{
+    width: 80px;
+    height: 80px;
+    float:left;
+    padding: 10px;
+}
+.header{
+    line-height: 400%;
+    font-size: 30Px;
+    color: white;
+    text-align: center;
+}
+.container1{
+    display:grid;
+    grid-template-columns:30% 60%;
+    background-color: #cad2c5;
+    width: 100%;
+    height:auto;
+}
+.sidebox{
+    display: flex;
+    background-color: #353535;
+    height: 800px;
+    width: 400px;
+    border-radius: 20px;
+    margin: 60px;
+    padding: 20px;
+}
+.sidebox1{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #cad2c5;
+    height: 800px;
+    width: 100%;
+    border-radius: 20px;
+    margin: 60px;
+    padding: 20px;
+    margin-left: 60px;
+}
+.searchbox {
+    background-color: #353535;
+    height:auto;
+    width: 900PX;
+    margin-left: 160px;
+    border-radius: 20px;
+}
+.namebox{
+    width: 100%;
+    height: 90px;
+    border-radius: 20px;
+    background-color:#353535 ;
+    color: white;
+}
+.threebox{
+    background-color: #cad2c5;
+    height: 800px;
+    width: 1200PX;
+    
+    display: flex;
+    flex-direction: row;
+    border-radius: 20px;
+    justify-content: space-around;
+    align-items: center;
+}
+.box1{
+    background-color: #353535;
+    display: flex;
+    height: 170px;  
+    width: 250px;
+    border-radius: 20px;
+}
+.box2{
+    background-color: #353535;
+    display: flex;
+    height: 170px;  
+    width: 250px;
+    border-radius: 20px;
+}
+.box3{
+    background-color: #353535;
+    display: flex;
+    height: 170px;  
+    width: 250px;
+    border-radius: 20px;
+}
+.lastbox{
+    background-color: #353535;
+    height: 400px;
+    width: 1200PX;
+    margin: 20PX;
+    border-radius: 20px;
+}
