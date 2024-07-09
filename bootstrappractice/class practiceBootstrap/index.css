@@ -1,14 +1,43 @@
-.form-control{
-  background-color: aqua;
+.box1{
+  background-color:#800080;
   height: 100px;
-  margin: 20px;
-
+  width: 100%;
+  margin: 1px;
+  color: white;
+  font-size: larger;
 }
-.mb-2{
-    margin-bottom: 200px;
+.fullbox{
+  background-color: bisque;
+  height: 100vh;
+  width: 100%;
 }
-
-.list{
-    display: flex;
-    flex-direction: row;
+.firstBox{
+  background-color: aqua;
+  margin: 10px;
+  height: 100vh;
+  margin-top: 5px;
 }
+.secondBox{
+  background-color: aqua;
+  margin: 10px;
+  height: 100vh;
+}
+.thirdBox{
+  background-color: aqua;
+  margin: 10px;
+  height: 100vh;
+}
+.btn{
+  background-color: #f0f0f0;
+  width: 120px;
+  margin: 5px;
+  justify-content:space-between;
+}
+.btn1{
+  background-color: #f0f0f0;
+  width: 490px;
+  margin-top: 15px;
+  margin-left: 22px;
+  border-radius: 4px;
+  
+} 
