@@ -1,0 +1,51 @@
+.header{
+    background-color: #2f3d46;
+    height: 100px;
+    width: 100%;
+    margin: 4px;
+    color: aliceblue;
+}
+.logo{
+    height: 80px;
+    width: 80px;
+    margin-top: 8px;
+    margin-left: 4px;
+}   
+.fullpage{
+    height: 800px;
+    width: 100%;
+    background-color: #cad2c5;
+}
+.Lhsbox{
+    background-color:#353535 ;
+    height: 400px;
+    width: 200px;
+    border-radius: 20px;
+    margin-top: 80px;
+}
+.Rhsbox{
+    background-color:cad2c5;
+    height: 500px;
+    width: 500px;
+}   
+.searchbox{
+    background-color:#353535 ;
+    margin-top: 80px;
+    width: 440px;
+    margin-left: 10px;
+}   
+.box1{
+    background-color: #353535 ;
+    width: 150px;
+    height: 90px;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+.box2{
+    background-color: #353535 ;
+    width: 480px;
+    height: 120px;
+    border-radius: 10px;
+    margin-top: 50px;
+}
+
