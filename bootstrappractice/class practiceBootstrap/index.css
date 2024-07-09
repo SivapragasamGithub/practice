@@ -1,0 +1,14 @@
+.form-control{
+  background-color: aqua;
+  height: 100px;
+  margin: 20px;
+
+}
+.mb-2{
+    margin-bottom: 200px;
+}
+
+.list{
+    display: flex;
+    flex-direction: row;
+}
