@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+    setInterval(() => {
+        // document.body.innerHTML=""
+        for(i=0;i<100;i++){
+        let box= document.createElement("div")
+        let randW=Math.floor(Math.random()*100)+"px"
+        let randh=Math.floor(Math.random()*100)+"px"
+        box.style.width=randW
+        box.style.height=randh
+        let randR=Math.floor (Math.random()*255);
+        let randG= Math.floor(Math.random()*255);
+        let randB= Math.floor(Math.random()*255);
+        box.style.backgroundColor=`rgb(${randR},${randG},${randB})`;
+        box.style.position = "absolute"
+        box.style.top = Math.floor(Math.random()*700)+"px"
+        box.style.left=Math.floor(Math.random()*window.innerWidth)+"px"
+        box.style.borderRadius=Math.floor(Math.random()*50)+"px"
+        
+        // console.log(Math.floor(Math.random()*800));
+        document.body.appendChild(box)  
+    }
+       
+    }, 1000);   
+    </script>
+</body>
+</html> 
