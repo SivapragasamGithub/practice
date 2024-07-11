@@ -9,24 +9,24 @@
     <script>
         
     setInterval(() => {
-        // document.body.innerHTML=""
-        for(i=0;i<100;i++){
+        document.body.innerHTML="" //to make for every for loop total HTML page Empty
+        for(i=0;i<100;i++){    //for loop will create 100 boxes in absolute position based on left and top values created and its Color will be change as per random number result, and its size also will be based on Random number result
         let box= document.createElement("div")
-        let randW=Math.floor(Math.random()*100)+"px"
+        let randW=Math.floor(Math.random()*100)+"px" //to get random number for assing width & concatinate PX for the value must be in Pixels
         let randh=Math.floor(Math.random()*100)+"px"
         box.style.width=randW
         box.style.height=randh
-        let randR=Math.floor (Math.random()*255);
+        let randR=Math.floor (Math.random()*255); //to get random number for assing color 
         let randG= Math.floor(Math.random()*255);
         let randB= Math.floor(Math.random()*255);
-        box.style.backgroundColor=`rgb(${randR},${randG},${randB})`;
+        box.style.backgroundColor=`rgb(${randR},${randG},${randB})`; //array literals used for mention randomly created number to assign values for rgb property.if we direct put random number var means no BGCOLOR. Page Empty
         box.style.position = "absolute"
         box.style.top = Math.floor(Math.random()*700)+"px"
         box.style.left=Math.floor(Math.random()*window.innerWidth)+"px"
         box.style.borderRadius=Math.floor(Math.random()*50)+"px"
         
-        // console.log(Math.floor(Math.random()*800));
-        document.body.appendChild(box)  
+        // console.log(Math.floor(Math.random()*800)); this is for check wat number iterated on evry single loop.
+        document.body.appendChild(box)  ;
     }
        
     }, 1000);   
