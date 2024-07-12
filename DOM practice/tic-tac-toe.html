@@ -1,65 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        document.body.style.padding ="0"
-        document.body.style.margin="0"
-        
+        document.body.style.padding = "0"
+        document.body.style.margin = "0"
+
         let screen = document.createElement("div");
         screen.style.display = "flex";
         screen.style.justifyContent = "center";
         screen.style.alignItems = "center";
         screen.style.height = "100vh";
         screen.style.width = "100%";
-        screen.style.backgroundColor = "blue";
-    
+        // screen.style.backgroundColor = "blue";
+
         let board = document.createElement("div")
         board.style.width = "606px";
         board.style.height = "606px";
         board.style.display = "flex";
         board.style.flexWrap = "wrap";
-        
-         
-        for(let i=0;i<9;i++){
-        let box = document.createElement("div");
-        box.style.backgroundColor = "wheat";
-        box.style.width = "200px";
-        box.style.height = "200px";
-        box.style.border = "1px solid black"
-        // box.innerText = "X"
-        box.style.textAlign = "center"
-        box.style.lineHeight = "203px"
-        box.style.fontSize = "2em"
-        box.style.cursor = "pointer";
 
-        box.onmousemove = function(){
-            this.style.backgroundColor = "#ecd2a2"
-        }
-        box.onmouseleave = function(){
-            this.style.backgroundColor = "wheat"
-        }
+        let currentPlayer = "X";
+        for (let i = 0; i < 9; i++) {
+            let box = document.createElement("div");
+            box.style.backgroundColor = "wheat";
+            box.style.width = "200px";
+            box.style.height = "200px";
+            box.style.border = "1px solid black"
+            // box.innerText = "X"
+            box.style.textAlign = "center"
+            box.style.verticalAlign = "middle"
+            box.style.lineHeight = "203px"
+            box.style.fontSize = "2em"
+            box.style.cursor = "pointer";
 
-
-        box.onclick = function(){
-            
-            if(this.innerText == ""){
-                this.innerText = currentplayer;
-                if(this.innerText =="X"){
-                    currentplayer ="O"
-                }
-                if(this.innerText == "O"){
-                    currentplayer = "X"
-                }
+            box.onmousemove = function () {
+                this.style.backgroundColor = "#ecd2a2"
+            }
+            box.onmouseleave = function () {
+                this.style.backgroundColor = "wheat"
             }
 
-        }
-        // box.style.border = "1px solid black"//to check all box stored where.bcos all store in continiously
-        board.appendChild(box)
+
+            box.onclick = function () {
+                if (this.innerText == "") {
+                    this.innerText = currentPlayer
+                    if (this.innerText == "x") {
+                        currentPlayer = "o"
+                    }
+                    if (this.innerText == "o") {
+                        currentPlayer = "x"
+                    }
+                }
+
+            }
+
+            board.appendChild(box)
 
 
         }
@@ -67,4 +69,5 @@
         document.body.appendChild(screen)
     </script>
 </body>
+
 </html>
