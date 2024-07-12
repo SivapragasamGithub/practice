@@ -18,7 +18,7 @@
 
         document.body.style.padding = "0"
         document.body.style.margin = "0"
-       
+
         let screen = document.createElement("div");
         screen.style.display = "flex";
         screen.style.width = "100%";
@@ -36,7 +36,7 @@
 
         let currentPlayer = "X";
         let row = 1;
-        let col = 1 ;
+        let col = 1;
 
         for (let i = 0; i < 9; i++) {
             let box = document.createElement("div");
@@ -47,44 +47,80 @@
             box.style.textAlign = "center"
             box.style.lineHeight = "203px"
             box.style.fontSize = "3em"
-           
-            let id= 0
-            if((i+1)%3 == 0){
-                id=`${row}${col}`;
-                row = row+1;
-                col =1
-            }else{
-                id=`${row}${col}`;
-                col=col+1
+
+            let id = 0
+            if ((i + 1) % 3 == 0) {
+                id = `${row}${col}`;
+                row = row + 1;
+                col = 1
+            } else {
+                id = `${row}${col}`;
+                col = col + 1
             }
-            box.setAttribute("id",id)
-           box.onmousemove =function (){
-            this.style.backgroundColor ="#ecd2a2"
-           }
-           box.onmouseleave = function(){
-            this.style.backgroundColor ="wheat"
-           }
+            box.setAttribute("id", id)
+            box.onmousemove = function () {
+                this.style.backgroundColor = "#ecd2a2"
+            }
+            box.onmouseleave = function () {
+                this.style.backgroundColor = "wheat"
+            }
 
             box.onclick = function () {
                 if (this.innerText == "") {
                     this.innerText = currentPlayer;
-                    
-                   let [row,col] = this.id.split("")
-                    boardArray[parseInt(row)-1][parseInt(col)-1]=currentPlayer;
+
+                    let [row, col] = this.id.split("")
+                    boardArray[parseInt(row) - 1][parseInt(col) - 1] = currentPlayer;
                     console.log(boardArray)
-                   
+
                     if (this.innerText == "X") {
                         currentPlayer = "O"
                     }
                     if (this.innerText == "O") {
                         currentPlayer = "X"
                     }
+                    checkwinner(boardArray)
                 }
             }
             board.appendChild(box)
         }
         screen.appendChild(board)
         document.body.appendChild(screen)
+
+        function checkwinner(boardArray) {
+            const rows = boardArray.length;
+            const col = boardArray[0].length;
+
+            //check row
+            for (let i = 0; i < rows; i++) {
+                if ((boardArray[i][0] === boardArray[i][1]) && (boardArray[i][1] === boardArray[i][2]))
+                    return boardArray[i][0]
+                
+            }
+
+            //check col
+            for (let i = 0; i < col; i++) {
+                if ((boardArray[i][0] === boardArray[i][1]) && (boardArray[i][1] === boardArray[i][2]))
+                    console.log(`${boardArray[i][0]}Win!`)
+                return boardArray[i][0]
+            }
+
+
+            //check diagnols
+            //1-3,2-2,3-1
+            //11,22,33
+            if ((boardArray[1][3] === boardArray[2][2]) && (boardArray[2][2] === boardArray[3][1]))
+            return boardArray[1][3]
+        // if((boardArray[1][1] === boardArray[2][2]) && (boardArray[2][2] === boardArray[3][3]))
+        // return boardArray[1][1]
+        //    else 
+        //    {
+            return null
+           }
+
+        // }
+
+
 
     </script>
 </body>
