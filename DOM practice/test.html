@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  let screen = document.createElement("div");
+        // screen.style.display = "flex";
+        // screen.style.justifyContent = "center";
+        // screen.style.alignItems = "center";
+        // screen.style.height = "100vh";
+        // screen.style.width = "100%";
+        // document.body.appendChild(screen)
+       
+       
+       let table = document.createElement("div");
+        
+        table.style.width = "900px";
+        table.style.height = "500px";
+        table.style.backgroundColor = "skyblue"
+        table.style.border = "1px solid black"
+            // box.innerText = "X"
+            table.style.textAlign = "center"
+            table.style.verticalAlign = "middle"
+            table.style.lineHeight = "203px"
+            table.style.fontSize = "2PX"
+            table.style.cursor = "pointer";
+        document.body.appendChild(table)
+        
+        
+    // let box = document.createElement("div");
+    //         box.style.backgroundColor = "wheat";
+    //         box.style.width = "200px";
+    //         box.style.height = "200px";
+    //         box.style.border = "1px solid black"
+    //         // box.innerText = "X"
+    //         box.style.textAlign = "center"
+    //         box.style.verticalAlign = "middle"
+    //         box.style.lineHeight = "203px"
+    //         box.style.fontSize = "2em"
+    //         box.style.cursor = "pointer";
+    //         document.body.appendChild(box)
+        
+        let data = [
+            {
+                "id": "1",
+                "name": "Lura Senger",
+                "email": "Xander_Collier@yahoo.com"
+            },
+            {
+                "id": "2",
+                "name": "Wilburn Weber",
+                "email": "Bennett_Kreiger11@yahoo.com"
+            },
+            {
+                "id": "3",
+                "name": "Tyrique Hahn",
+                "email": "Juston.Altenwerth@yahoo.com"
+            },
+            {
+                "id": "4",
+                "name": "Lenny Bailey",
+                "email": "Guiseppe_Hegmann@yahoo.com"
+            },
+            {
+                "id": "5",
+                "name": "Vladimir Keeling",
+                "email": "Louisa_Walsh18@hotmail.com"
+            },
+            {
+                "id": "6",
+                "name": "Kellie Crona",
+                "email": "Chandler_Abernathy@yahoo.com"
+            },
+            {
+                "id": "7",
+                "name": "Carolina White",
+                "email": "Royal50@hotmail.com"
+            },
+            {
+                "id": "8",
+                "name": "Alfredo Conn",
+                "email": "Clarabelle34@hotmail.com"
+            },
+            {
+                "id": "9",
+                "name": "Stan Shanahan",
+                "email": "Lamar.McClure@hotmail.com"
+            },
+            {
+                "id": "10",
+                "name": "Marvin Fay",
+                "email": "Osbaldo58@hotmail.com"
+            },
+        ];
+        // for (let i = 0; i < 100; i++) {
+        //     data.push(`h ${i + 1}`)
+        // }
+        const personPerRow = 3;
+        const rowcount = data.length / personPerRow;
+        //    console.log(rowcount);
+
+        for (let i = 0; i < rowcount; i++) {
+            const btn = document.createElement("button")
+            
+            btn.innerText = i + 1
+            btn.onclick = function () {
+                let starting = (parseInt(this.innerText) - 1) * personPerRow;
+                let limit = starting + personPerRow;
+                console.log(starting)
+                console.log(limit)
+                let finalData = data.slice(starting, limit)
+                console.log(finalData)
+               
+            }   
+            
+            document.body.appendChild(btn)
+           
+            
+        }                       
+ 
+    </script>
+</body>
+
+</html>

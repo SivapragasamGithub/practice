@@ -7,7 +7,20 @@
 </head>
 <body>
     <script>
-        let table = document.createElement("div");
+       let screen = document.createElement("div");
+        screen.style.display = "flex";
+        screen.style.justifyContent = "center";
+        screen.style.alignItems = "center";
+        screen.style.height = "100vh";
+        screen.style.width = "100%";
+       
+       
+       let table = document.createElement("div");
+        
+        table.style.width = "auto";
+        table.style.height = "auto";
+        table.style.backgroundColor = "skyblue"
+        document.body.appendChild(table)
         let data = [
     {
       "id": "1",
