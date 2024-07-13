@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea name="" id="tweet" rows="5" cols="50"></textarea>
+    <h1 id="count"></span>
+    <script>
+        let tweetBox = document.getElementById("tweet");
+            tweetBox.onkeyup = function(){
+                let count = document.getElementById("count")
+                if(this.value.length<=30){
+                count.innerText = `the count is ${(this.value.length)}`
+            }
+            else{
+                count.innerText = "stop typing"
+            }
+            }
+    </script>
+</body>
+</html>
