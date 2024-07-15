@@ -6,7 +6,20 @@
     <title>Document</title>
 </head>
 <body>
+  
+  <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
+
     <script>
+      let table = document.createElement("div");
+        
+        table.style.width = "500px";
+        table.style.height = "95vh";
+        table.style.position = "relative"
+        table.style.backgroundColor = "skyblue"
+        table.style.color = "brown"
+        document.body.appendChild(table)
+        
+        
         let data = [
     {
       "id": "1",
@@ -507,15 +520,12 @@
       "id": "100",
       "name": "Arlene Kassulke",
       "email": "Josiane_Smith@yahoo.com"
-    }
-  ];
-        for (let i=0;i<100;i++){
-            data.push(`h ${i+1}`)
-        }
+    }]
+  ;
+        
        const personPerRow = 5;
        const rowcount = data.length / personPerRow;
-    //    console.log(rowcount);
-
+      
        for(let i=0;i<rowcount;i++){
         const btn = document.createElement("button")
         btn.innerText = i+1
@@ -526,6 +536,8 @@
             console.log(limit)
             let finalData = data.slice(starting,limit)
        console.log(finalData)
+       let response = JSON.stringify(finalData)
+       table.innerText =  response
         }
         document.body.appendChild(btn)
        }

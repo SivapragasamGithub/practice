@@ -9,43 +9,13 @@
 
 <body>
     <script>
-        //  let screen = document.createElement("div");
-        // screen.style.display = "flex";
-        // screen.style.justifyContent = "center";
-        // screen.style.alignItems = "center";
-        // screen.style.height = "100vh";
-        // screen.style.width = "100%";
-        // document.body.appendChild(screen)
-       
-       
-       let table = document.createElement("div");
-        
-        table.style.width = "900px";
-        table.style.height = "500px";
+        let table = document.createElement("div");
+        table.style.width = "500px";
+        table.style.height = "95vh";
+        table.style.position = "relative"
         table.style.backgroundColor = "skyblue"
-        table.style.border = "1px solid black"
-            // box.innerText = "X"
-            table.style.textAlign = "center"
-            table.style.verticalAlign = "middle"
-            table.style.lineHeight = "203px"
-            table.style.fontSize = "2PX"
-            table.style.cursor = "pointer";
+        table.style.color = "brown"
         document.body.appendChild(table)
-        
-        
-    // let box = document.createElement("div");
-    //         box.style.backgroundColor = "wheat";
-    //         box.style.width = "200px";
-    //         box.style.height = "200px";
-    //         box.style.border = "1px solid black"
-    //         // box.innerText = "X"
-    //         box.style.textAlign = "center"
-    //         box.style.verticalAlign = "middle"
-    //         box.style.lineHeight = "203px"
-    //         box.style.fontSize = "2em"
-    //         box.style.cursor = "pointer";
-    //         document.body.appendChild(box)
-        
         let data = [
             {
                 "id": "1",
@@ -98,16 +68,11 @@
                 "email": "Osbaldo58@hotmail.com"
             },
         ];
-        // for (let i = 0; i < 100; i++) {
-        //     data.push(`h ${i + 1}`)
-        // }
+
         const personPerRow = 3;
         const rowcount = data.length / personPerRow;
-        //    console.log(rowcount);
-
         for (let i = 0; i < rowcount; i++) {
             const btn = document.createElement("button")
-            
             btn.innerText = i + 1
             btn.onclick = function () {
                 let starting = (parseInt(this.innerText) - 1) * personPerRow;
@@ -116,15 +81,15 @@
                 console.log(limit)
                 let finalData = data.slice(starting, limit)
                 console.log(finalData)
-               
-            }   
-            
+                let response = JSON.stringify(finalData)
+
+                let res = JSON.stringify(response)
+                table.innerText = res
+            }
             document.body.appendChild(btn)
-           
-            
-        }                       
- 
+        }                           
     </script>
+
 </body>
 
 </html>
