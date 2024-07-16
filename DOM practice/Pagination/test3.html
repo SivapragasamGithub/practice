@@ -37,6 +37,9 @@
 </head>
 
 <body>
+    <h1 id="title">This is a table</h1>
+    <p id="description">This table contains employee details</p>
+    <div  class="table-responsive"></div>
     <div class="table-container" id="table-container"></div>
     <div class="navigation-buttons">
         <button id="first">First</button>
@@ -44,7 +47,10 @@
         <button id="next">Next</button>
         <button id="last">Last</button>
     </div>
+    
+    <script src="https://app.zenclass.in/sheets/v1/js/zen/suite/bundle.js"></script>
     <script>
+       
         const table = document.getElementById("table-container");
 
         const data = [
@@ -75,7 +81,7 @@
                 displayData(currentPage);
             }
         };
-
+        
         document.getElementById("next").onclick = () => {
             if (currentPage < rowCount) {
                 currentPage++;
