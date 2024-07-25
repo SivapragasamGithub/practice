@@ -1,0 +1,42 @@
+.title{
+    background-color: aqua;
+    height:80px;
+    width:500px;
+    display: flex;
+    margin-left: 650px;
+    justify-content: center;
+}
+.box{
+    height:400px;
+    width:500px;
+   
+     background-color:bisque;
+   position: absolute;
+   margin-left: 650px;
+  
+   margin-top: 20px; 
+}
+.field{
+    background-color: blue;
+    height: 300px;
+    width: 400px;
+    
+    margin-left: 50px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input1{
+    background-color: aqua;
+}
+.result{    
+    background-color: aqua;
+}
+.btn{
+    position:absolute;
+    margin-top: 100px;
+    height: 15px;
+    width: 50px;
+    border-radius: 10px;
+}
