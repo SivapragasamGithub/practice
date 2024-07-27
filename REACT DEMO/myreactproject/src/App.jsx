@@ -1,11 +1,16 @@
-import { useState } from "react"
+import Box from "./Box";
+import Card from "./Card";
+import Message from "./Message";
+import "./App.css";
 
 function App() {
- const[count,setCount] = useState(0)
-
-  return (
-   <h1>hello</h1>
-  )
+  return(
+    <div className="mainapp">
+<Box />
+<Box />
+<Box />
+    </div>
+  ) 
 }
 
-export default App
+export default App;
