@@ -6,9 +6,9 @@ import "./App.css";
 function App() {
   return(
     <div className="mainapp">
-<Box />
-<Box />
-<Box />
+<Box subs="free" price="0" />
+<Box subs="plus" price="9" />
+<Box subs="pro" price="49" />
     </div>
   ) 
 }

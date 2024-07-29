@@ -1,50 +1,22 @@
-let descripton = [
-  {
-    subscription: "single user",
-  },
-  {
-    subscription: "50GB storage",
-  },
-  {
-    subscription: "unlimited Public projects",
-  },
-  {
-    subscription: "community Access",
-  },
-  {
-    subscription: "unlimited private Projects",
-  },
-  {
-    subscription: "Dedicated Phone supports",
-  },
-  {
-    subscription: "free subdomain",
-  },
-  {
-    subscription: "Monthly status Reports",
-  },
-];
-let symbol = "* "
+import Plans from "./Plans";
 
-function Box() {
+function Box(props) {
   return (
     <div>
       <div className="container">
         <div className="subscription">
-          <h6>Free</h6>
-          <h1>$0/Month</h1>
+          <h6>{props.subs}</h6>
+          <h1>${props.price}/Month</h1>
           <hr></hr>
         </div>
         <div className="descripton">
-          {descripton.map((people) => {
-            return (
+          
               <div>
-                <h4>{symbol}{people.subscription}</h4>
+                <h4> <Plans/> </h4>
               </div>
-            );
-          })}
+          
         </div>
-        <button>Button</button>
+        <button className="button" >Button</button>
       </div>
     </div>
   );
