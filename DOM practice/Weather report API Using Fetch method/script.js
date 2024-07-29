@@ -6,7 +6,8 @@ fetch('https://restcountries.com/v3.1/all')
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.json();
+        
+        return response.json()       
     })
     .then(countries => {
         countries.forEach(country => {
@@ -15,6 +16,7 @@ fetch('https://restcountries.com/v3.1/all')
             const region = country.region;
             const latlng = country.latlng;
             const flagUrl = country.flags.svg;
+            
 
             // Fetch weather data
             fetch(`https://openweathermap.org/`)
@@ -22,11 +24,14 @@ fetch('https://restcountries.com/v3.1/all')
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
+                    
                     return response.json();
+                    
                 })
                 .then(weather => {
                     const weatherDescription = weather.weather[0].description;
                     const temperature = weather.main.temp;
+                    console.log(weather);
 
                     // Create Bootstrap card
                     const card = document.createElement('div');
