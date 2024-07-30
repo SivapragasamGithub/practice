@@ -1,5 +1,6 @@
 import Plans from "./Plans";
 
+
 function Box(props) {
   return (
     <div>
