@@ -105,7 +105,7 @@ function App() {
       "description": "Slim phone wallet with card slots and RFID protection."
     }
   ];
-  
+
 
   const [cart, setCart] = useState([]);
 
@@ -129,20 +129,14 @@ function App() {
           <div className="col-lg-8">
             <div className="d-flex flex-wrap">
               {Products.map((product) => (
-                <Card
-                  key={product.name}
-                  product={product}
-                  addToCart={addToCart}
-                  removeFromCart={removeFromCart}
-                  isProductInCart={isProductInCart(product)}
-                />
+                <Card name={product.name} product={product} addToCart={addToCart} removeFromCart={removeFromCart} isProductInCart={isProductInCart(product)} />
               ))}
             </div>
           </div>
           <div className="col-lg-4 text-center">
             <h1>Cart</h1>
             {cart.map((item) => (
-              <div key={item.name}>
+              <div name={item.name}>
                 <h5>{item.name}</h5>
                 <p>Price: {item.price}</p>
               </div>
