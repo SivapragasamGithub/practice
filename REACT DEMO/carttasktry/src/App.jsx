@@ -1,8 +1,10 @@
-import { useState } from "react";
-import Card from "./Card";
-import Header from "./Header";
+import { useState } from "react"
+import Card from "./Card"
+import Header from "./Header"
+
 
 function App() {
+
   const Products = [
     {
       "name": "Wireless Earbuds",
@@ -104,54 +106,33 @@ function App() {
       "price": 18,
       "description": "Slim phone wallet with card slots and RFID protection."
     }
-  ];
-  
+  ]
+const[quantity,setQuantity] = useState(0)
+const[btn,setBtn]= useState("Add to cart")
 
-  const [cart, setCart] = useState([]);
 
-  const addToCart = (product) => {
-    setCart([...cart, product]);
-  };
-
-  const removeFromCart = (product) => {
-    setCart(cart.filter((item) => item.name !== product.name));
-  };
-
-  const isProductInCart = (product) => {
-    return cart.some((item) => item.name === product.name);
-  };
 
   return (
     <>
-      <Header quantity={cart.length} />
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-8">
-            <div className="d-flex flex-wrap">
-              {Products.map((product) => (
-                <Card
-                  key={product.name}
-                  product={product}
-                  addToCart={addToCart}
-                  removeFromCart={removeFromCart}
-                  isProductInCart={isProductInCart(product)}
-                />
-              ))}
+      <Header quantity={quantity} />
+      <div className="container" >
+        <div className="row" >
+          <div className="col-lg-8" >
+
+            <div className="d-flex flex-wrap" >
+              {
+                Products.map((product) => {
+                  // return (<Card name={product.name} price={product.price} description={product.description} />)// add props instead of product in card components if want to use this method
+                  return ( <Card product={product} btn={btn} inc={inc} />)
+                })
+              }
             </div>
           </div>
-          <div className="col-lg-4 text-center">
-            <h1>Cart</h1>
-            {cart.map((item) => (
-              <div key={item.name}>
-                <h5>{item.name}</h5>
-                <p>Price: {item.price}</p>
-              </div>
-            ))}
-          </div>
+          <div className="col-lg-4 text-center"><h1>Cart</h1></div>
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
