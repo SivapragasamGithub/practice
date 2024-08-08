@@ -11,19 +11,19 @@ function App() {
     <><div>
       <Header /><br />
       <Form />
-      <Taskbar/><br />
+      <Taskbar /><br />
       <div className="container" >
         <div className="row" >
-          <div className="col-lg-12" style={{marginTop: "50px", display: "flex",justifyItems:"center"}}>
-          <Carddisp name="Office task-1" description="first"/>
-          <Carddisp name="Office task-2" description="Second"/>
-          <Carddisp name="Office task-3" description="Third"/>
+          <div className="col-lg-12" style={{ marginTop: "50px", display: "flex", justifyItems: "center" }}>
+            <Carddisp name="Office task-1" description="first" />
+            <Carddisp name="Office task-2" description="Second" />
+            <Carddisp name="Office task-3" description="Third" />
           </div>
         </div>
-      
+
       </div>
-      
-      
+
+
     </div>
     </>
   )
