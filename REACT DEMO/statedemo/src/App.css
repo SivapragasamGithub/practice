@@ -1,5 +1,33 @@
 .light{
   width: 200px;
   height: 200px;
-  border-radius: 100%;
+  border-radius: 50%;
 }
+
+/* Filename - App.css */
+
+/* .App {
+	text-align: center;
+}
+
+.geeks {
+	color: green;
+}
+
+.light {
+	color: red;
+	background-color: white;
+}
+.dark {
+	color: lightgreen;
+	background-color: gray;
+}
+
+button {
+	font-size: large;
+	margin: 2%;
+	background-color: green;
+	color: white;
+	border-radius: 5px;
+	padding: 10px;
+} */
