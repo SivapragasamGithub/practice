@@ -19,7 +19,7 @@ function Newstyle() {
                 style={{
                     backgroundColor: lightswitch,
                     opacity: opacity,
-                    transition: 'opacity 0.3s ease', // Smooth transition
+                    transition: 'opacity 0.3s ease'
                 }}
             ></div>
             <button onClick={() => setswitch('red')}>Red</button>
