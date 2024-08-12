@@ -22,17 +22,17 @@ function TodoForm({ addTodo }) {
                 type="text"
                 placeholder="Todo Name"
                 value={taskName}
-                onChange={(e) => setTaskName(e.target.value)}
-                style={{ padding: "5px", flex: 1 }}
+                onChange={(inputText) => setTaskName(inputText.target.value)}
+                style={{ padding: "5px",width:"250px",borderRadius:"10px" }}
             />
             <input
                 type="text"
                 placeholder="Todo Description"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                style={{ padding: "5px", flex: 2 }}
+                onChange={(inputText) => setDescription(inputText.target.value)}
+                style={{ padding: "5px",width:"500px",borderRadius:"10px" }}
             />
-            <button onClick={handleSubmit} style={{ padding: "5px 10px" }}>Add Todo</button>
+            <button onClick={handleSubmit} style={{ backgroundColor:"#14ad8a",borderRadius:"10px" }}>Add Todo</button>
         </div>
     );
 }

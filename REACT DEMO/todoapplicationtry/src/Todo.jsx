@@ -10,13 +10,13 @@ function Todo() {
         setTodos([...todos, todo]);
     };
 
-    const editTodo = (index) => {
-        const newTaskName = prompt("Edit task name:", todos[index].taskName);
-        const newDescription = prompt("Edit description:", todos[index].description);
+    const editTodo = (siva) => {
+        const newTaskName = prompt("Edit task name:", todos[siva].taskName);
+        const newDescription = prompt("Edit description:", todos[siva].description);
         if (newTaskName && newDescription) {
             const updatedTodos = [...todos];
-            updatedTodos[index].taskName = newTaskName;
-            updatedTodos[index].description = newDescription;
+            updatedTodos[siva].taskName = newTaskName;
+            updatedTodos[siva].description = newDescription;
             setTodos(updatedTodos);
         }
     };
@@ -41,7 +41,7 @@ function Todo() {
         <div style={{ padding: "20px" }}>
             <TodoForm addTodo={addTodo} />
 
-            <div style={{ marginBottom: "20px", textAlign: "center" }}>
+            <div display="flex" style={{ marginBottom: "20px", textAlign: "center" }}>
                 <label>Status Filter: </label>
                 <select onChange={(e) => setStatusFilter(e.target.value)} style={{ padding: "5px" }}>
                     <option value="All">All</option>

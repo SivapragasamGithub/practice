@@ -1,11 +1,11 @@
 function Card({ todo, index, editTodo, deleteTodo, updateStatus }) {
     return (
         <div style={{
-            border: "1px solid #ccc",
-            borderRadius: "5px",
+            border: "2px  ",
+            borderRadius: "8px",
             padding: "10px",
             width: "200px",
-            backgroundColor: "#e6f7ff",
+            backgroundColor: "#ccf5d3",
         }}>
             <h4>{todo.taskName}</h4>
             <p>{todo.description}</p>
@@ -13,7 +13,7 @@ function Card({ todo, index, editTodo, deleteTodo, updateStatus }) {
                 <label>Status: </label>
                 <select
                     value={todo.status}
-                    onChange={(e) => updateStatus(index, e.target.value)}
+                    onChange={(status) => updateStatus(index, status.target.value)}
                     style={{
                         backgroundColor: todo.status === "Completed" ? "lightgreen" : "lightcoral",
                         padding: "5px",
@@ -26,8 +26,8 @@ function Card({ todo, index, editTodo, deleteTodo, updateStatus }) {
                 </select>
             </div>
             <div style={{ marginTop: "10px", display: "flex", justifyContent: "space-between" }}>
-                <button onClick={() => editTodo(index)} style={{ padding: "5px 10px" }}>Edit</button>
-                <button onClick={() => deleteTodo(index)} style={{ padding: "5px 10px" }}>Delete</button>
+                <button onClick={() => editTodo(index)} style={{ padding: "5px 10px",backgroundColor:"#13ad89" }}>Edit</button>
+                <button onClick={() => deleteTodo(index)} style={{ padding: "5px 10px",backgroundColor:"#d15d20" }}>Delete</button>
             </div>
         </div>
     );
