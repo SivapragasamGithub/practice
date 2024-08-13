@@ -6,6 +6,8 @@ import Products from "./Products"
 import Contact from "./Contact"
 import About from "./About"
 import { BrowserRouter, Route, Router, Routes } from "react-router-dom"
+import Product from "./Product"
+
 function App() {
 
 
@@ -16,8 +18,9 @@ function App() {
           <Nav />
           <Routes>
             <Route index path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/About" element={<About />} />
             <Route path="/products" element={<Products />} />
+           <Route path="/product/:id" element={<Product/>}/>
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </BrowserRouter>
@@ -27,3 +30,4 @@ function App() {
 }
 
 export default App
+{/* <Route path="/product/:id" element= {<Product/>}/> */}
