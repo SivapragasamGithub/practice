@@ -1,33 +1,41 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Nav() {
-    return (
-        <div className='container bg-body-tertiary'>
-            
-
-            <ul class="nav justify-content-center nav-pills">
-
-                <li class="nav-item">
-                    <Link class="nav-link active" aria-current="page" to="/">All</Link>
-                </li>
-                <li class="nav-item">
-                    <Link class="nav-link" to="/fullstack">Full stack Development</Link>
-                </li>
-                <li class="nav-item">
-                    <Link class="nav-link" to="/Cybersecurity">Cybersecurity</Link>
-                </li>
-                <li class="nav-item">
-                    <Link class="nav-link" to="/Datasceince">Data Sceince</Link>
-                </li>
-                <li class="nav-item">
-                    <Link class="nav-link" to="/Carrer">Career</Link>
-                </li>
-
-            </ul>
-            <hr></hr>
-        </div>
-    )
+  return (
+    <div>
+      <div className="container bg-body-tertiary">
+        <ul className="nav justify-content-center nav-pills">
+          <li className="nav-item">
+            <Link className="nav-link active" aria-current="page" to="/">
+              All
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/fullstack">
+              Full Stack Development
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/cybersecurity">
+              Cybersecurity
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/datascience">
+              Data Science
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/career">
+              Career
+            </Link>
+          </li>
+        </ul>
+        <hr />
+      </div>
+    </div>
+  );
 }
 
-export default Nav
+export default Nav;
