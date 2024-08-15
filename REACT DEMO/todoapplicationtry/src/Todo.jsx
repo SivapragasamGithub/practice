@@ -43,7 +43,7 @@ function Todo() {
 
             <div display="flex" style={{ marginBottom: "20px", textAlign: "center" }}>
                 <label>Status Filter: </label>
-                <select onChange={(e) => setStatusFilter(e.target.value)} style={{ padding: "5px" }}>
+                <select onChange={(event) => setStatusFilter(event.target.value)} style={{ padding: "5px" }}>
                     <option value="All">All</option>
                     <option value="Completed">Completed</option>
                     <option value="Not Completed">Not Completed</option>

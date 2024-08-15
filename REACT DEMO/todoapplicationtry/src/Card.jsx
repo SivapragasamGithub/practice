@@ -15,7 +15,7 @@ function Card({ todo, index, editTodo, deleteTodo, updateStatus }) {
                     value={todo.status}
                     onChange={(status) => updateStatus(index, status.target.value)}
                     style={{
-                        backgroundColor: todo.status === "Completed" ? "lightgreen" : "lightcoral",
+                        backgroundColor: todo.status === "Completed" ? "#19aa89" : "#fb8283",
                         padding: "5px",
                         border: "none",
                         borderRadius: "3px",
