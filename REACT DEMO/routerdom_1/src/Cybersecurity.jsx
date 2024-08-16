@@ -18,7 +18,7 @@ function Cybersecurity() {
     {
       image: "https://www.guvi.in/blog/wp-content/uploads/2021/03/Blog-9-768x402.png",
       name: "The Cybersecurity Surge: 5 Must-Have Cybersecurity Certifications!",
-      language1: "telugu",
+      language1: "",
       language2: "English"
     }
 
@@ -29,7 +29,7 @@ function Cybersecurity() {
       <div className='row' >
         {
           Cyb.map((course) => {
-return <Card name={course.name} language1={course.language1} language2={course.language2} image={course.image}  />
+            return <Card name={course.name} language1={course.language1} language2={course.language2} image={course.image} />
           })
         }
       </div>

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 function Nav() {
     return (
-        <div className='container bg-body-tertiary'>
+        <div className='container bg-body-tertiary '>
             
 
-        <ul class="nav justify-content-center nav-pills">
+        <ul class="nav justify-content-center  border-2">
 
             <li class="nav-item">
                 <Link class="nav-link active" aria-current="page" to="/"><h5>All</h5></Link>
@@ -20,12 +20,12 @@ function Nav() {
             <li class="nav-item">
                 <Link class="nav-link" to="/datascience"><h5>Data Sceince</h5></Link>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" >
                 <Link class="nav-link" to="/career"><h5>Career</h5></Link>
             </li>
 
         </ul>
-        <hr></hr>
+        <hr class="border border-primary border-3 opacity-75"/>
     </div>
     )
 }

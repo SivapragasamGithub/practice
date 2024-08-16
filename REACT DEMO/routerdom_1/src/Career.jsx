@@ -24,15 +24,15 @@ function Career() {
 
   ]
   return (
-    <div className='container' > 
-    <div className='row'>
-      {
-        jobs.map((job)=>{
-return<Card name={job.name} language1={job.language1} language2={job.language2} image={job.image}/>
-        })
-      }
+    <div className='container' >
+      <div className='row'>
+        {
+          jobs.map((job) => {
+            return <Card name={job.name} language1={job.language1} language2={job.language2} image={job.image} />
+          })
+        }
       </div>
-      </div>
+    </div>
   )
 }
 
