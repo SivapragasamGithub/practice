@@ -3,6 +3,7 @@ import Card from "./Card"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Characters from "./Characters"
 import Modal from "./Modal"
+import "./App.css"
 
 function App() {
   const characters = [
