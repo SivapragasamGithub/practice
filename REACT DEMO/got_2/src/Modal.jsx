@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useFormik } from 'formik'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -30,8 +31,13 @@ function Modal() {
 
             return error
         },
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: async (values) => {
+            try {
+                await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/got", values)
+                navigation(-1)
+            } catch (error) {
+                alert("something went wrong")
+            }
         }
     })
     return (
