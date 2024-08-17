@@ -11,6 +11,11 @@ function Modal() {
             image:"",
             clan:"",
             description:""
+        },
+        onSubmit:()=>{
+            console.log("submit");
+            
+
         }
     }) 
   return (
@@ -40,8 +45,9 @@ function Modal() {
         </div>        
       </div>
       <div class="modal-footer">
+      <button type="button" class="btn btn-primary">Save changes</button>
         <button type="button" class="btn btn-secondary" onClick={()=>navigation(-1)} data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        
       </div>
       </form>
     </div>
