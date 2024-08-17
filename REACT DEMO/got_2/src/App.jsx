@@ -1,11 +1,8 @@
-import "bootstrap/dist/css/bootstrap.min.css"
-
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Card from "./Card"
+import "bootstrap/dist/css/bootstrap.min.css"
 import Characters from "./Characters"
-import Modelu from "./Modelu"
-
-
-
+import Modal from "./Modal"
 
 function App() {
   const characters = [
@@ -29,22 +26,18 @@ function App() {
       image: "https://i.pinimg.com/736x/48/c3/0f/48c30f56517d8d8a5cc069a743fa63c2.jpg",
       clan: "Stark",
       description: "description13"
-    },
+    }
   ]
 
-
   return (
-
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Characters characters={characters} />}>
-<Route path="modelu" element={<Modelu/>}/>
-          </Route>
-
-        </Routes>
+      <Routes>
+        <Route  path="/" element={<Characters characters={characters}/>}>
+        <Route path="modal" element={<Modal/>}/>
+        </Route>
+      </Routes>
       </BrowserRouter>
-
     </>
   )
 }

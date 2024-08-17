@@ -1,7 +1,5 @@
 import React from 'react'
 import Card from './Card'
-import { Outlet } from 'react-router-dom'
-
 
 function Characters({ characters }) {
     return (
@@ -19,7 +17,7 @@ function Characters({ characters }) {
                     })
                 }
             </div>
-        <Outlet/>
+        
         </div>
     )
 }
