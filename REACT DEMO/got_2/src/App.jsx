@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Card from "./Card"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Characters from "./Characters"
 import Modal from "./Modal"
-import "./App.css"
+
 
 function App() {
   const characters = [
@@ -17,7 +16,7 @@ function App() {
     {
       id: "2",
       name: "Arya stark",
-      image: "https://assets.teenvogue.com/photos/5cc7017bd1b87b6cfcd4d405/master/pass/00-tout-maisie-williams.jpg",
+      image: "https://static.wikia.nocookie.net/gameofthrones/images/1/1e/Arya_Stark-First_of_his_Name.jpg/revision/latest/scale-to-width-down/2100?cb=20140505224634",
       clan: "Stark",
       description: "description2"
     },
