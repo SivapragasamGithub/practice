@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Subtotal() {
+function Subtotal({subTotal,setSubTotal}) {
   return (
    <div className='container' >
     <div className='row' >

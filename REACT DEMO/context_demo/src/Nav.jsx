@@ -15,7 +15,7 @@ function Nav() {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                            <Link className="nav-link active" aria-current="page" to="/">{`Home ${userData.userName}`}</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link active" aria-current="page" to="/about">About</Link>
@@ -29,7 +29,7 @@ function Nav() {
                     
                 </div>
                 <div>
-                    <h4>{userData.userName}</h4>
+                    <h4>{`the price ${userData.userName}`}</h4>
                 </div>
             </div>
         </nav>

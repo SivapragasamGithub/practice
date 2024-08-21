@@ -140,7 +140,8 @@ function App() {
                 <h5>{item.name}</h5>
                 <p>Price: {item.price}</p>
               </div>
-            ))}
+            ))} 
+            
           </div>
         </div>
       </div>

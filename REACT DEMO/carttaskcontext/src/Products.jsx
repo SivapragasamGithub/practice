@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React from 'react';
+import { useCart } from './CartContext';
 import Card from './Card';
-import Cartpage from './Cartpage';
-import UserContext from './UserContext';
 
-function Products({name,itemDetail}) {
-
+function Products() {
+    const { addToCart } = useCart();
     const products = [
         {
             "id": 1,
@@ -126,30 +125,14 @@ function Products({name,itemDetail}) {
                 "count": 470
             }
         }
-    ]
-    const [cart, setCart] = useState([]);
-    const { user } = useContext(UserContext);
+    ];
 
     return (
         <div className='container'>
             <div className='row'>
-                <div className='col-lg-8'>
-                    <div className="row">
-                        {products.map((product) => (
-                            <Card product={product} cart={cart} setCart={setCart} key={product.id} />
-                        ))}
-                    </div>
-                </div>
-                <div className='col-lg-4 text-center'>
-                    <h1>Cart</h1>
-                    {cart.map((item, index) => (
-                        <div key={index} name={item.title}>
-                            <h4>{item.title}</h4>
-                            <p>Price: {item.price}</p>
-                        </div>
-                    ))}
-                    
-                </div>
+                {products.map((product) => (
+                    <Card key={product.id} product={product} onAddToCart={() => addToCart(product)} />
+                ))}
             </div>
         </div>
     );

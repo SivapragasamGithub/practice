@@ -1,14 +1,16 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
-let UserContext = createContext();
+const UserContext = createContext();
 
-export const UserProvider = ({children})=>{
-    const [subTotal,setSubTotal] = useState(0)
-    const [grandTotal,setGrandTotal] = useState(0)
+export const UserProvider = ({ children }) => {
+    const [user, setUser] = useState({ name: "", itemDetail: "" });
     
-return<UserContext.Provider value={{subTotal,setSubTotal,grandTotal,setGrandTotal}}>
-    {children}
-</UserContext.Provider>
-}
+
+    return (
+        <UserContext.Provider value={{ user, setUser }}>
+            {children}
+        </UserContext.Provider>
+    );
+};
 
 export default UserContext;
