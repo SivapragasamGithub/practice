@@ -10,7 +10,7 @@ function Card({ product, onAddToCart }) {
                     <h4 className="card-title">{name}</h4>
                     <p className="card-text flex-grow-1">{itemDetail}</p>
                     <h6 className="card-title">{product.category}</h6>
-                    <img src={product.image} className="card-img-top mb-3 rounded-3" alt="product" style={{ height: "230px", width: "230px" }} />
+                    <img src={product.image} className="card-img-top mb-3 rounded-3" alt="product" style={{ height: "230px", width: "auto" }} />
                     <div className="mt-auto">
                         <h6 className="card-title">${product.price}</h6>
                         <button className="btn btn-primary w-100" onClick={onAddToCart}>Add to Cart</button>

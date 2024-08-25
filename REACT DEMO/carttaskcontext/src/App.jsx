@@ -7,8 +7,17 @@ import "bootstrap/dist/css/bootstrap.min.css"
 function App() {
   return (
     <CartProvider>
-      <Products />
-      <CartPage />
+      <div className='container'>
+        <div className='row'>
+          <div className='col-lg-8'>
+            <Products />
+          </div>
+          <div className='col-lg-4' >
+            <CartPage />
+          </div>
+        </div>
+      </div>
+
     </CartProvider>
   );
 }
