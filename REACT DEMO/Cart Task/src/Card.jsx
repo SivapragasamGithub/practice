@@ -1,12 +1,16 @@
 import React from 'react';
 
 function Card({ product, addToCart, removeFromCart, isProductInCart }) {
+  
   const handleButtonClick = () => {
+   
     if (isProductInCart) {
       removeFromCart(product);
+     
     } else {
       addToCart(product);
     }
+    
   };
 
   return (

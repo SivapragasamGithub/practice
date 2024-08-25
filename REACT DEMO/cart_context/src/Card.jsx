@@ -18,7 +18,7 @@ function Card({ product, setCart, cart }) {
             setCart([...cart, product]);
         }
     };
-    const name = product.title.length > 21 ? product.title.substring(0, 20) : product.title;
+    const name = product.title.length > 21 ? product.title.substring(0, 10) : product.title;
     const itemDetail = product.description.length > 21 ? product.description.substring(0, 50) + "....." : product.description;
     return (
         <div className='col-lg-4 col-md-6 col-sm-12 mb-4'>

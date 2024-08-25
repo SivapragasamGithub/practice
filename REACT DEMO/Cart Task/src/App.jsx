@@ -118,7 +118,10 @@ function App() {
   };
 
   const isProductInCart = (product) => {
+
     return cart.some((item) => item.name === product.name);
+
+
   };
 
   return (
@@ -129,7 +132,7 @@ function App() {
           <div className="col-lg-8">
             <div className="d-flex flex-wrap">
               {Products.map((product) => (
-                <Card name={product.name} product={product} addToCart={addToCart} removeFromCart={removeFromCart} isProductInCart={isProductInCart(product)} />
+                <Card product={product} addToCart={addToCart} removeFromCart={removeFromCart} isProductInCart={isProductInCart(product)} />
               ))}
             </div>
           </div>
@@ -140,8 +143,8 @@ function App() {
                 <h5>{item.name}</h5>
                 <p>Price: {item.price}</p>
               </div>
-            ))} 
-            
+            ))}
+
           </div>
         </div>
       </div>
