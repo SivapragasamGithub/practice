@@ -1,11 +1,12 @@
 import axios from 'axios'
 import { useFormik } from 'formik'
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 
 function Modal() {
     const navigation = useNavigate()
+    const {id}= useParams()
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -33,20 +34,39 @@ function Modal() {
         },
         onSubmit: async (values) => {
             try {
-                await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/got", values)
+                if (id) {
+                    await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/got/${id}`, values)
+                } else {
+                    await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/got", values)
+                }
                 navigation(-1)
             } catch (error) {
-                alert("something went wrong")
+                alert("Something went wrong")
             }
         }
     })
+
+    const fetchCharacterData = async () => {
+        if (id) {
+            try {
+                const response = await axios.get(`https://66bf9c5d42533c403146a60d.mockapi.io/got/${id}`)
+                formik.setValues(response.data)
+            } catch (error) {
+                alert("Failed to fetch character data")
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchCharacterData()
+    }, [id])
     return (
         <div class="modal" style={{ display: "block" }}>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <form onSubmit={formik.handleSubmit}>
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                        <h5 className="modal-title">{id ? "Edit Character" : "Create Character"}</h5>
                         </div>
                         <div class="modal-body">
                             <div className='col-lg-12' >
@@ -92,3 +112,4 @@ function Modal() {
 }
 
 export default Modal
+
