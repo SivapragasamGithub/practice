@@ -1,8 +1,25 @@
 const express = require("express");
-const app = express();
+const cors = require("cors")
+const app = express()
 
-app.get("/user", (req, res) => {
-  res.json({ message: "Hello world" });
+//middleware
+app.use(cors({
+  origin:"http://localhost:5173"
+}))
+
+let users = [
+  {
+    name:"user 1",
+    age:20
+  },
+  {
+    name:"user 2",
+    age:30
+  }
+]
+
+app.get("/users", (req, res) => {
+  res.json(users)
 });
 
 app.listen(3000, () => {
