@@ -1,11 +1,10 @@
-const express = require ("express")
-const app = express()
+const express = require("express");
+const app = express();
 
-app.get("/user",(req,res)=>{
-    res.json({message:"hello world"})
-})
+app.get("/user", (req, res) => {
+  res.json({ message: "Hello world" });
+});
 
-app.listen(3000,()=>{
-    console.log("web server running");
-    
-})
+app.listen(3000, () => {
+  console.log("web server running");
+});
