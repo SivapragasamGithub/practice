@@ -7,6 +7,8 @@ app.use(cors({
   origin:"http://localhost:5173"
 }))
 
+app.use(express.json)
+
 let users = [
   {
     name:"user 1",
@@ -19,6 +21,9 @@ let users = [
 ]
 
 app.get("/users", (req, res) => {
+  res.json(users)
+});
+app.post("/users", (req, res) => {
   res.json(users)
 });
 
