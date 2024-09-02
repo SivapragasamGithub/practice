@@ -7,6 +7,7 @@ function Modal() {
 
     const formik = useFormik({
         initialValues: {
+            image:"",
             title: "",
             author: "",
             ISBNNumber: "",
@@ -45,6 +46,15 @@ function Modal() {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { Navigate(-1) }}></button>
                         </div>
                         <div className="modal-body">
+                        <div className='col-lg-12'>
+                                <label htmlFor="">Image</label>
+                                <input type="text"
+                                    name='image'
+                                    value={formik.values.image}
+                                    onChange={formik.handleChange}
+                                    className={`form-control`}
+                                />
+                            </div>
                             <div className='col-lg-12'>
                                 <label htmlFor="">Title</label>
                                 <input type="text"
