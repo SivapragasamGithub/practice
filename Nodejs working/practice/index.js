@@ -1,6 +1,10 @@
 const express = require ("express")
+const cors = require("cors")
 const app = express()
-
+//middleware (gate keeper. whenever something come to this server must cross this one first)
+app.use(cors({
+    origin:"http://localhost:5173"
+}))
 let users = [
     {
         name:"user 1",
