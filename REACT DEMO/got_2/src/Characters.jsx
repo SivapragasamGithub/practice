@@ -26,7 +26,6 @@ function Characters() {
 
     return (
         <div className="container" >
-
             <div className="row" >
                 <div className="col-lg-12 text-center mb-3" >
                     <h1>Game of Thrones</h1>

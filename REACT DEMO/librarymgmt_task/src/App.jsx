@@ -3,6 +3,7 @@ import Booklist from "./Booklist";
 import Books from "./Books";
 import Navbar from "./Navbar";
 import Modal from "./Modal";
+import "bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Booklist />} />
-            <Route path="/modal" element={<Modal/>} />
+            <Route path="/modal" element={<Modal />} />
           </Routes>
         </BrowserRouter>
 

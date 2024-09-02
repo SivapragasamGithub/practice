@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { useFormik } from 'formik'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +8,7 @@ function Modal() {
 
     const formik = useFormik({
         initialValues: {
-            image:"",
+            image: "",
             title: "",
             author: "",
             ISBNNumber: "",
@@ -15,6 +16,9 @@ function Modal() {
         },
         validate: (values) => {
             let error = {};
+            if (values.image == "") {
+                error.image = "pls enter title"
+            }
             if (values.title == "") {
                 error.title = "pls enter title"
             }
@@ -29,9 +33,9 @@ function Modal() {
             }
             return error
         },
-        onSubmit: (values) => {
-            console.log(values);
-
+        onSubmit: async (values) => {
+            await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/user",values)
+Navigate(-1)
         }
 
     })
@@ -46,13 +50,13 @@ function Modal() {
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { Navigate(-1) }}></button>
                         </div>
                         <div className="modal-body">
-                        <div className='col-lg-12'>
+                            <div className='col-lg-12'>
                                 <label htmlFor="">Image</label>
                                 <input type="text"
                                     name='image'
                                     value={formik.values.image}
                                     onChange={formik.handleChange}
-                                    className={`form-control`}
+                                    className={`form-control ${formik.errors.image && 'is-invalid'}`}
                                 />
                             </div>
                             <div className='col-lg-12'>
@@ -61,7 +65,7 @@ function Modal() {
                                     name='title'
                                     value={formik.values.title}
                                     onChange={formik.handleChange}
-                                    className={`form-control`}
+                                    className={`form-control ${formik.errors.title && 'is-invalid'}`}
                                 />
                             </div>
                             <div className='col-lg-12'>
@@ -70,7 +74,7 @@ function Modal() {
                                     name='author'
                                     value={formik.values.author}
                                     onChange={formik.handleChange}
-                                    className={`form-control`}
+                                    className={`form-control ${formik.errors.author && 'is-invalid'}`}
                                 />
                             </div>
                             <div className='col-lg-12'>
@@ -79,7 +83,7 @@ function Modal() {
                                     name='ISBNNumber'
                                     value={formik.values.ISBNNumber}
                                     onChange={formik.handleChange}
-                                    className={`form-control`}
+                                    className={`form-control ${formik.errors.ISBNNumber && 'is-invalid'}`}
                                 />
                             </div>
                             <div className='col-lg-12'>
@@ -88,7 +92,7 @@ function Modal() {
                                     name='PublicationDate'
                                     value={formik.values.PublicationDate}
                                     onChange={formik.handleChange}
-                                    className={`form-control`}
+                                    className={`form-control ${formik.errors.PublicationDate && 'is-invalid'}`}
                                 />
                             </div>
                         </div>
