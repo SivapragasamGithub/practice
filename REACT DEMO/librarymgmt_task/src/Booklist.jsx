@@ -11,8 +11,8 @@ function Booklist() {
         try {
             const bookData = await axios.get("https://66bf9c5d42533c403146a60d.mockapi.io/user")
             setbooks(bookData.data)
-            const editBookData = await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/user ${id}`)
-            seteditBooks(...books,editBookData.data)
+            // const editBookData = await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/user ${id}`)
+            // seteditBooks(...books,editBookData.data)
 
         } catch (error) {
             alert("something went wrong")
