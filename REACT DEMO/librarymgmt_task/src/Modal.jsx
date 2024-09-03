@@ -1,19 +1,20 @@
 import axios from 'axios'
 import { useFormik } from 'formik'
-import React from 'react'
+import React,{ useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-function Modal() {
+function Modal({ bookToEdit }) {
     const Navigate = useNavigate()
 
     const formik = useFormik({
         initialValues: {
-            image: "",
-            title: "",
-            author: "",
-            ISBNNumber: "",
-            PublicationDate: ""
+            image: bookToEdit?.image || "",
+            title: bookToEdit?.title || "",
+            author: bookToEdit?.author || "",
+            ISBNNumber: bookToEdit?.ISBNNumber || "",
+            PublicationDate: bookToEdit?.PublicationDate || ""
         },
+        enableReinitialize:true,
         validate: (values) => {
             let error = {};
             if (values.image == "") {
@@ -34,11 +35,14 @@ function Modal() {
             return error
         },
         onSubmit: async (values) => {
-            await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/user",values)
-Navigate(-1)
+            if (bookToEdit) {
+                await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${bookToEdit.id}`, values);
+            } else {
+                await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/user", values);
+            }
+            Navigate(-1);
         }
-
-    })
+    });
 
     return (
         <div className="modal" style={{ display: "block" }}>
@@ -46,7 +50,7 @@ Navigate(-1)
                 <div className="modal-content">
                     <form onSubmit={formik.handleSubmit}>
                         <div className="modal-header">
-                            <h5 className="modal-title">Modal title</h5>
+                            <h5 className="modal-title">{bookToEdit ? "Edit Book" : "Create Book"}</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" onClick={() => { Navigate(-1) }}></button>
                         </div>
                         <div className="modal-body">
@@ -98,7 +102,7 @@ Navigate(-1)
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => { Navigate(-1) }}>Close</button>
-                            <input type="submit" className="btn btn-primary" value={"save changes"} />
+                            <input type="submit" className="btn btn-primary" value={bookToEdit ? "Save Changes" : "Create Book"} />
                         </div>
                     </form>
                 </div>

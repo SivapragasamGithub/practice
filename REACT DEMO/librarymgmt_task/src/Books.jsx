@@ -1,13 +1,8 @@
 import React from 'react'
-import Booklist from './Booklist'
 
-const handleEditClick = (editid)=>{
-    return (editid)
-}
-const handleDeleteClick = (deleteid)=>{
-    return (deleteid)
-}
-function Books({ book }) {
+
+
+function Books({ book,handleDeleteClick,handleEditClick }) {
 
 
     return (
@@ -18,7 +13,7 @@ function Books({ book }) {
                 <p class="card-text">{book.author}</p>
                 <p class="card-text">{book.ISBNNumber}</p>
                 <p class="card-text">{book.PublicationDate}</p>
-                <button className='btn btn-primary mb-3 m-1' onClick={() => { handleEditClick(book.id) }}>Edit</button>
+                <button className='btn btn-primary mb-3 m-1' onClick={() => { handleEditClick(book) }}>Edit</button>
                 <button className='btn btn-primary mb-3 m-1' onClick={() => { handleDeleteClick(book.id) }}>Delete</button>
             </div>
         </div>
