@@ -5,31 +5,30 @@ import Books from './Books'
 import { Modal } from 'bootstrap'
 
 function Booklist() {
+
     const [books, setbooks] = useState([])
     const [bookToEdit, setBookToEdit] = useState(null);
     const navigate = useNavigate();
+
     const fetchData = async () => {
-
         try {
-            const bookData = await axios.get("https://66bf9c5d42533c403146a60d.mockapi.io/user")
+            const bookData = await axios.get("https://66bf9c5d42533c403146a60d.mockapi.io/user")  //to load the home page card during mount process
             setbooks(bookData.data)
-
 
         } catch (error) {
             alert("something went wrong")
         }
     }
-    const handleEditClick = (book) => {
-        console.log(book);
-        
-        setBookToEdit(book);
-        console.log(book);
-        navigate('/modal', { state: { bookToEdit: book } });
-        console.log(book);
-    };
 
-    const handleDeleteClick = (productId) => {
-        setbooks((curbooks) => curbooks.filter(item => item.id !== productId));
+
+    const handleDeleteClick = async (productId) => {
+        try {
+            await axios.delete(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${productId}`) //In given API address slect that particular product.id and delte it
+            setbooks((curbooks) => curbooks.filter(item => item.id !== productId));//after delete product.ID,use filter for that ID cannot be present on currnt book list.then mutate the list to current list
+        } catch (error) {
+            alert("something wrong")
+        }
+
     };
 
     useEffect(() => {
@@ -42,18 +41,20 @@ function Booklist() {
                 <div className="col-lg-12 text-center mb-3" >
                     <h4>Books & authors List </h4>
                     <Link to={"/modal"} className="btn btn-primary " >Create</Link>
-                    
+
                 </div>
             </div>
 
             <div className="row">
                 {
+
                     books.map((book) => {
-                        return <Books key={book.id} book={book} handleDeleteClick={handleDeleteClick} handleEditClick={handleEditClick} />
+
+                        return <Books key={book.id} book={book} handleDeleteClick={handleDeleteClick} />
                     })
                 }
             </div>
-            
+
         </div>
     )
 }

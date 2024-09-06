@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { useFormik } from 'formik'
-import React,{ useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { bookcontext } from './App'
 
-function Modal({ bookToEdit }) {
+function Modal() {
+    const { id } = useParams()
     const Navigate = useNavigate()
-
+    const { bookToEdit, setBookToEdit } = useContext(bookcontext)
     const formik = useFormik({
         initialValues: {
             image: bookToEdit?.image || "",
@@ -14,7 +16,7 @@ function Modal({ bookToEdit }) {
             ISBNNumber: bookToEdit?.ISBNNumber || "",
             PublicationDate: bookToEdit?.PublicationDate || ""
         },
-        enableReinitialize:true,
+
         validate: (values) => {
             let error = {};
             if (values.image == "") {
@@ -35,14 +37,33 @@ function Modal({ bookToEdit }) {
             return error
         },
         onSubmit: async (values) => {
-            if (bookToEdit) {
-                await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${bookToEdit.id}`, values);
-            } else {
-                await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/user", values);
+            try {
+                if (id) {  //If ID true go for updat(PUT) if ID not present go for Post
+                    await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${id}`, values); // after the feild values edited it will be updated(repost) with the new values
+                } else {
+                    await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/user", values);// this for create a card: during on submit the values given by user will send to API address and post
+                }
+                Navigate(-1);
+            } catch (error) {
+                alert("something wrong")
             }
-            Navigate(-1);
         }
     });
+
+    const fetchCharacterData = async () => {
+        if (id) {
+            try {
+                const response = await axios.get(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${id}`)  // During Update process: slect the API address based on that id by user selction, and display it with the feild values
+                formik.setValues(response.data) // formik set method for update the new value
+                console.log(response.data);
+            } catch (error) {
+                alert("Failed to fetch character data")
+            }
+        }
+    }
+    useEffect(() => {
+        fetchCharacterData()
+    }, [id])
 
     return (
         <div className="modal" style={{ display: "block" }}>

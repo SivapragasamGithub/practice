@@ -8,8 +8,11 @@ function Characters() {
 
     const fetchData = async () => {
         try {
-            const charData = await axios.get('https://66bf9c5d42533c403146a60d.mockapi.io/got')
+            const charData = await axios.get('https://66bf9c5d42533c403146a60d.mockapi.io/got') //during components loading this data are need to get from DB to display on window (Useeffect for mounting)
+           
             setCharacters(charData.data)
+            
+            
         } catch (error) {
             alert('something went wrong')
         }

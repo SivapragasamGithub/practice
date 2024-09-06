@@ -33,9 +33,9 @@ function Modal() {
         onSubmit: async (values) => {
             try {
                 if (id) {
-                    await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/got/${id}`, values)
+                    await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/got/${id}`, values)  
                 } else {
-                    await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/got", values)
+                    await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/got", values)  //to post the cahracters that we enter
                 }
                 navigation(-1)
             } catch (error) {
@@ -49,11 +49,14 @@ function Modal() {
             try {
                 const response = await axios.get(`https://66bf9c5d42533c403146a60d.mockapi.io/got/${id}`)
                 formik.setValues(response.data)
+                console.log(response.data);
             } catch (error) {
                 alert("Failed to fetch character data")
             }
         }
     }
+
+
 
     useEffect(() => {
         fetchCharacterData()

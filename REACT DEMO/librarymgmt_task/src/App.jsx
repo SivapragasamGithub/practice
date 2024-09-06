@@ -4,26 +4,27 @@ import Books from "./Books";
 import Navbar from "./Navbar";
 import Modal from "./Modal";
 import "bootstrap/dist/css/bootstrap.min.css"
-
+import { createContext, useState } from "react";
+export const bookcontext = createContext();
 function App() {
-
-
+  const [bookToEdit, setBookToEdit] = useState([]);
   return (
-    <>
-      <div>
 
-        <BrowserRouter>
-          <Navbar />
+    <bookcontext.Provider value={{ bookToEdit, setBookToEdit }}>
 
-          <Routes>
-            <Route path="/" element={<Booklist />} />
-            <Route path="/modal" element={<Modal />} />
-          </Routes>
-        </BrowserRouter>
+      <BrowserRouter>
+        <Navbar />
 
-      </div>
+        <Routes>
+          <Route path="/" element={<Booklist />} />
+          <Route path="/modal" element={<Modal />} />
+          <Route path="/modal/:id" element={<Modal />} />
+        </Routes>
+      </BrowserRouter>
+    </bookcontext.Provider>
 
-    </>
+
+
   )
 }
 
