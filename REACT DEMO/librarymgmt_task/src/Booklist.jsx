@@ -2,10 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Books from './Books'
-import { Modal } from 'bootstrap'
 
 function Booklist() {
-
     const [books, setbooks] = useState([])
     const [bookToEdit, setBookToEdit] = useState(null);
     const navigate = useNavigate();
@@ -20,7 +18,6 @@ function Booklist() {
         }
     }
 
-
     const handleDeleteClick = async (productId) => {
         try {
             await axios.delete(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${productId}`) //In given API address slect that particular product.id and delte it
@@ -28,7 +25,6 @@ function Booklist() {
         } catch (error) {
             alert("something wrong")
         }
-
     };
 
     useEffect(() => {
@@ -39,22 +35,17 @@ function Booklist() {
         <div className='container'>
             <div className="row" >
                 <div className="col-lg-12 text-center mb-3" >
-                    <h4>Books & authors List </h4>
+                    <h4>Books List </h4>
                     <Link to={"/modal"} className="btn btn-primary " >Create</Link>
-
                 </div>
             </div>
-
             <div className="row">
                 {
-
                     books.map((book) => {
-
                         return <Books key={book.id} book={book} handleDeleteClick={handleDeleteClick} />
                     })
                 }
             </div>
-
         </div>
     )
 }

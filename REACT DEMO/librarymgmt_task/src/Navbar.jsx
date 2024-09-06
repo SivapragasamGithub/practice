@@ -1,25 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
-    return (
-        <ul class="nav justify-content-center">
-                     
-  <li class="nav-item">
-    <p class="nav-link active" aria-current="page" href="#"><h3>Libarary</h3> </p>
-  </li>
+  return (
+    <ul class="nav justify-content-center">
 
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">books</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">authors</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
- 
-</ul>
-    )
+      <Link to={"/authorlist"} className='btn btn-primary m-2'>Authors</Link>
+      <Link to={"/"} className='btn btn-primary m-2'>Books</Link>
+
+
+    </ul>
+  )
 }
 
 export default Navbar

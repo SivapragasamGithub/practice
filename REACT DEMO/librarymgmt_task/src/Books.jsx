@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 function Books({ book, handleDeleteClick }) {
 
-
     return (
         <div class="card" style={{ width: "18rem", margin: "5px", padding: "5px" }}>
             <img src={book.image} class="card-img-top" alt="..." style={{ width: "250px", height: "250px", margin: "10px" }} />
