@@ -20,7 +20,7 @@ function Booklist() {
 
     const handleDeleteClick = async (productId) => {
         try {
-            await axios.delete(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${productId}`) //In given API address slect that particular product.id and delte it
+            await axios.delete(`https://66bf9c5d42533c403146a60d.mockapi.io/user/${productId}`) //In given API address slect that particular product.id and delete it
             setbooks((curbooks) => curbooks.filter(item => item.id !== productId));//after delete product.ID,use filter for that ID cannot be present on currnt book list.then mutate the list to current list
         } catch (error) {
             alert("something wrong")
