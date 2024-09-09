@@ -31,6 +31,7 @@ function Card() {
                 <div className='col-lg-12'>
                     <div className='col-lg-12'>
                         <h2>Address List</h2>
+                        <br />
                         <Link to="/form" className='btn btn-primary'>create</Link>
                     </div>
                     <div className='col-lg-12'>

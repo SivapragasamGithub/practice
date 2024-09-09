@@ -34,6 +34,45 @@ function Form() {
             if (values.name === "") {
                 error.name = "please enter name"
             }
+            if (values.username === "") {
+                error.username = "please enter username"
+            }
+            if (values.email === "") {
+                error.email = "please enter email"
+            }
+            if (values.address.street === "") {
+                error.address.street = "please enter street"
+            }
+            if (values.address.suite === "") {
+                error.address.suite = "please enter suite"
+            }
+            if (values.address.city === "") {
+                error.address.city = "please enter city"
+            }
+            if (values.address.zipcode === "") {
+                error.address.zipcode = "please enter zipcode"
+            }
+            if (values.address.geo.lat === "") {
+                error.address.geo.lat = "please enter address.geo.lat"
+            }
+            if (values.address.geo.lng === "") {
+                error.address.geo.lng = "please enter address.geo.lng"
+            }
+            if (values.phone === "") {
+                error.phone = "please enter phone"
+            }
+            if (values.website === "") {
+                error.website = "please enter website"
+            }
+            if (values.company.Cname === "") {
+                error.company.Cname = "please enter company.name"
+            }
+            if (values.company.catchPhrase === "") {
+                error.company.catchPhrase = "please enter company.catchPhrase"
+            }
+            if (values.company.bs === "") {
+                error.company.bs = "please enter company.bs"
+            }
             return error
         },
         onSubmit: async (values) => {
@@ -311,7 +350,8 @@ function Form() {
                             <div className='col-lg-10'>
                                 <div className='row'>
                                     <label htmlFor="">Name</label>
-                                    <input type="text" name='name' value={formik.values.name} onChange={formik.handleChange} className='form-control' />
+                                    <input type="text" name='name' value={formik.values.name} onChange={formik.handleChange} className={`form-control ${formik.errors.name && 'is-invalid'}`} />
+                                    <span style={{ color: 'red' }}>{formik.errors.name}</span>
                                 </div>
                             </div>
                             <div className='col-lg-12'>
