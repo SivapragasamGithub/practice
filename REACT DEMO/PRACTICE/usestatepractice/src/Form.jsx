@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useFormik } from 'formik'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
 function Form() {
@@ -11,37 +11,62 @@ function Form() {
             name: "",
             username: "",
             email: "",
-            street: "",
-            suite: "",
-            city: "",
-            zipcode: "",
-            lat: "",
-            lng: "",
+            address: {
+                street: "",
+                suite: "",
+                city: "",
+                zipcode: "",
+                geo: {
+                    lat: "",
+                    lng: ""
+                },
+            },
             phone: "",
             website: "",
-            Cname: "",
-            catchPhrase: "",
-            bs: "",
+            company: {
+                Cname: "",
+                catchPhrase: "",
+                bs: ""
+            },
         },
         validate: (values) => {
             let error = {};
             if (values.name === "") {
                 error.name = "please enter name"
             }
-
             return error
         },
         onSubmit: async (values) => {
             try {
-                await axios.post("https://66d5f031f5859a704267edf6.mockapi.io/address", values)
+                if (id) {
+                    const resp = await axios.put(`https://66d5f031f5859a704267edf6.mockapi.io/address/${id}`, values)
+                    console.log(resp);
+                } else {
+                    await axios.post("https://66d5f031f5859a704267edf6.mockapi.io/address", values)
+                }
                 navigation(-1)
             } catch (error) {
                 alert("something went wrong")
             }
-
         }
     })
 
+    const fetchData = async () => {
+        if (id) {
+            try {
+                const response = await axios.get(`https://66d5f031f5859a704267edf6.mockapi.io/address/${id}`)
+                formik.setValues(response.data)
+                console.log(response.data);
+            } catch (error) {
+                alert("Failed something went wrong")
+            }
+        }
+
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [id])
 
     const Data = [
         {
@@ -313,7 +338,7 @@ function Form() {
                             <div className='col-lg-10'>
                                 <div className='row'>
                                     <label htmlFor="">street</label>
-                                    <input type="text" name='street' value={formik.values.street} onChange={formik.handleChange} className='form-control' />
+                                    <input type="text" name='address.street' value={formik.values.address.street} onChange={formik.handleChange} className='form-control' />
                                 </div>
                             </div>
                             <div className='col-lg-12'>
@@ -321,19 +346,19 @@ function Form() {
                                     <div className='col-lg-3 m-1'>
                                         <div className='row'>
                                             <label htmlFor="">suite</label>
-                                            <input type="suite" name='suite' value={formik.values.suite} onChange={formik.handleChange} className='form-control' />
+                                            <input type="suite" name='address.suite' value={formik.values.address.suite} onChange={formik.handleChange} className='form-control' />
                                         </div>
                                     </div>
                                     <div className='col-lg-3 m-1'>
                                         <div className='row'>
                                             <label htmlFor="">city</label>
-                                            <input type="text" name='city' value={formik.values.city} onChange={formik.handleChange} className='form-control' />
+                                            <input type="text" name='address.city' value={formik.values.address.city} onChange={formik.handleChange} className='form-control' />
                                         </div>
                                     </div>
                                     <div className='col-lg-3 m-1'>
                                         <div className='row'>
                                             <label htmlFor="">zipcode</label>
-                                            <input type="text" name='zipcode' value={formik.values.zipcode} onChange={formik.handleChange} className='form-control' />
+                                            <input type="text" name='address.zipcode' value={formik.values.address.zipcode} onChange={formik.handleChange} className='form-control' />
                                         </div>
                                     </div>
                                 </div>
@@ -342,18 +367,17 @@ function Form() {
                                 <div className='row'>
                                     <div className='row'>
                                         <label htmlFor=""><h4>Geo</h4></label>
-
                                     </div>
                                     <div className='col-lg-4'>
                                         <div className='row'>
                                             <label htmlFor="">lat</label>
-                                            <input type="text" name='lat' value={formik.values.lat} onChange={formik.handleChange} className='form-control' />
+                                            <input type="text" name='address.geo.lat' value={formik.values.address.geo.lat} onChange={formik.handleChange} className='form-control' />
                                         </div>
                                     </div>
                                     <div className='col-lg-4'>
                                         <div className='row'>
                                             <label htmlFor="">lng</label>
-                                            <input type="text" name='lng' value={formik.values.lng} onChange={formik.handleChange} className='form-control' />
+                                            <input type="text" name='address.geo.lng' value={formik.values.address.geo.lng} onChange={formik.handleChange} className='form-control' />
                                         </div>
                                     </div>
                                 </div>
@@ -373,25 +397,24 @@ function Form() {
                             <div className='col-lg-10'>
                                 <div className='row'>
                                     <label htmlFor=""><h4>company</h4></label>
-
                                 </div>
                             </div>
                             <div className='col-lg-10'>
                                 <div className='row'>
                                     <label htmlFor="">name</label>
-                                    <input type="text" name='Cname' value={formik.values.Cname} onChange={formik.handleChange} className='form-control' />
+                                    <input type="text" name='company.Cname' value={formik.values.company.Cname} onChange={formik.handleChange} className='form-control' />
                                 </div>
                             </div>
                             <div className='col-lg-10'>
                                 <div className='row'>
                                     <label htmlFor="">catchPhrase</label>
-                                    <input type="text" name='catchPhrase' value={formik.values.catchPhrase} onChange={formik.handleChange} className='form-control' />
+                                    <input type="text" name='company.catchPhrase' value={formik.values.company.catchPhrase} onChange={formik.handleChange} className='form-control' />
                                 </div>
                             </div>
                             <div className='col-lg-10'>
                                 <div className='row'>
                                     <label htmlFor="">bs</label>
-                                    <input type="text" name='bs' value={formik.values.bs} onChange={formik.handleChange} className='form-control' />
+                                    <input type="text" name='company.bs' value={formik.values.company.bs} onChange={formik.handleChange} className='form-control' />
                                 </div>
                             </div>
                             <button type='submit' className='btn btn-primary m-3'>Create</button>
