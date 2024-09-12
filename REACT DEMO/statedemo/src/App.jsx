@@ -16,8 +16,8 @@ function App() {
       <Light/>
       <Newstyle/> */}
       {/* <Login_page/> */}
-      {/* <Test/> */}
-      <Login/>
+      <Test/>
+      {/* <Login/> */}
     </>
   )
 }

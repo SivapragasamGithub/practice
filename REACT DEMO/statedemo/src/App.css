@@ -1,8 +1,8 @@
-.light{
+/* .light{
   width: 200px;
   height: 200px;
   border-radius: 50%;
-}
+} */
 
 /* Filename - App.css */
 
@@ -31,3 +31,8 @@ button {
 	border-radius: 5px;
 	padding: 10px;
 } */
+
+.quote{
+	background: rgb(32,126,205);
+background: linear-gradient(202deg, rgba(32,126,205,1) 0%, rgba(32,173,205,0.7022148058252426) 100%);
+}
