@@ -15,9 +15,6 @@ function Users() {
 
         }
     }
-
-
-
     useEffect(() => {
         getData()
     }, []);
