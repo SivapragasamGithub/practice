@@ -1,10 +1,12 @@
-import React, { useContext } from 'react'
-import UserCard from '../Cards/UserCard';
-import userContext from '../UserContext';
+import { createContext, useState } from "react";
+import UserProfile from "./Profile Page/UserProfile";
+import UserPage from "./HomePage/UserPage";
+import UserCard from "./Cards/UserCard";
 
-function UserPage() {
-    const { candidat, setCandidate } = useContext(userContext)
-    const candidatesData = [
+let userContext = createContext();
+
+export const UserProvider = ({ children }) => {
+    const [candidat, setCandidate] = useState([
         {
             name: "Alice Johnson",
             email: "alice@gmail.com",
@@ -16,14 +18,14 @@ function UserPage() {
             photo: "https://static.vecteezy.com/system/resources/previews/003/241/796/non_2x/search-employee-and-candidate-vector.jpg",
             projects: [
                 {
-                    projectName: "E-Commerce Website",
-                    projectDescription: "Developed a full-featured e-commerce web app using React, Redux, and Node.js.",
-                    projectLink: "https://example.com/projects/ecommerce"
+                    projectName1: "E-Commerce Website",
+                    projectDescription1: "Developed a full-featured e-commerce web app using React, Redux, and Node.js.",
+                    projectLink1: "https://example.com/projects/ecommerce"
                 },
                 {
-                    projectName: "Portfolio Website",
-                    projectDescription: "Created a personal portfolio to showcase my work and blog using modern JavaScript frameworks.",
-                    projectLink: "https://example.com/projects/portfolio"
+                    projectName2: "Portfolio Website",
+                    projectDescription2: "Created a personal portfolio to showcase my work and blog using modern JavaScript frameworks.",
+                    projectLink2: "https://example.com/projects/portfolio"
                 }
             ]
         },
@@ -115,19 +117,10 @@ function UserPage() {
                 }
             ]
         }
-    ];
-
-    return (
-        <div className="container">
-            <div className="column">
-                {
-                    candidat.map(user =>
-                        <UserCard user={user} />
-                    )
-                }
-            </div>
-        </div>
-    )
+    ])
+    return <userContext.Provider value={{ candidat, setCandidate }}>
+        {children}
+    </userContext.Provider>
 }
 
-export default UserPage
+export default userContext;

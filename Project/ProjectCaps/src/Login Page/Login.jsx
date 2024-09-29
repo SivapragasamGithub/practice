@@ -28,7 +28,7 @@ function Login() {
                                         </label>
                                     </div>
                                     <div className="d-grid">
-                                        <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign in</button>
+                                        <Link className="btn btn-primary btn-login text-uppercase fw-bold" type="submit" to={"/jobspage"} >Sign in</Link>
                                     </div>
                                     <div className="d-flex justify-content-center">
                                         <Link className="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold mt-3 link-underline-primary border border-primary p-2" to="/user-register">Candidate Sign up</Link>

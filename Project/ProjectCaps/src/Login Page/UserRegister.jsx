@@ -1,6 +1,7 @@
 import React from 'react'
 
 function UserRegister() {
+    
     return (
         <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -15,7 +16,7 @@ function UserRegister() {
                                             <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init className="form-outline flex-fill mb-0">
                                                 <input type="text" id="form3Example1c" className="form-control" />
-                                                <label className="form-label" for="form3Example1c">Your Name</label>
+                                                <label className="form-label" for="form3Example1c">User Name</label>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row align-items-center mb-4">
