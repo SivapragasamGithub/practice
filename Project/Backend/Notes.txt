@@ -1,0 +1,8 @@
+npm init -y
+npm install express
+app.listen to run webserver
+write api first(it will not run until we write middleware (CORS))
+npm install cors(middleware)
+origin is a gateway for to receive Frontend API from
+another middleware app.use(express.json()) for receive req.body from Frontend
+now write mongo db commands fro post from particular route

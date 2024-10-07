@@ -1,16 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import userContext from '../UserContext'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
 
 function UserProfile() {
   const { candidat, setCandidate } = useContext(userContext)
+
   return (
     <div className="container">
       {
-        candidat.map(user =>
+        candidat.map((user, index) =>
           // console.log(user.projects.map(project => console.log(project.projectName))
           // )
-          <div className="container m-3">
+          <div key={index} className="container m-3">
             <div className="card mb-3" style={{ maxWidth: "auto", height: "90vh" }}>
               <div className="row g-1">
                 <div className='row-md-4 d-flex justify-content-center md-3 m-3'>
@@ -28,26 +30,24 @@ function UserProfile() {
                     <p>Experience: {user.experience} </p>
                     <p>Skills: {user.skills} </p>
                     <p>Role: {user.role} </p>
-                    <p>Projects</p>
-                    {
-                      user.projects.map(project =>
-                        // console.log(project.projectName1)
 
-                        <li>ProjectName: {project.projectName1}</li>,
-                        // <li>ProjectDescription:{project.projectDescription1} </li>,
-                        // <li>ProjectLink:{project.projectLink1} </li>
-                      )
-                    },
-                    {
+                    {/* {
                       user.projects.map(project =>
-                        <li>ProjectDescription:{project.projectDescription1} </li>
+                      // console.log(project.projectName)
+
+                      {
+                        return (
+                          <>
+                            <p>Projects:</p>
+                            <li>ProjectName: {project.projectName}</li>
+                            <li>ProjectDescription:{project.projectDescription} </li>
+                            <li>ProjectLink:{project.projectLink} </li><br />
+                          </>
+                        )
+                      }
                       )
-                    },
-                    {
-                      user.projects.map(project =>
-                        <li>ProjectLink:{project.projectLink1} </li>
-                      )
-                    }
+                    } */}
+
 
 
                   </div>

@@ -19,10 +19,12 @@ function UserCard({ user }) {
                             <p><h4>Skills</h4>
                                 <div className='d-flex '>
                                     <div className='column text-start'>
-                                        {/* Dynamically render skills */}
-                                        {user.skills.map((skill, index) => (
-                                            <li key={index}>{skill}</li>
-                                        ))}
+                                        <ul>
+                                            {/* Dynamically render skills */}
+                                            {user.skills.split(',').map((skill, index) => (
+                                                <li key={index}>{skill}</li>
+                                            ))}
+                                        </ul>
                                     </div>
                                 </div>
                             </p>

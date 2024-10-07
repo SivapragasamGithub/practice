@@ -33,7 +33,7 @@ function UserModal() {
             },
             onSubmit: async (values) => {
                 try {
-                    await axios.post("", values)
+                    await axios.post("http://localhost:3000/user", values)
                     Navigate(-1)
                 } catch (error) {
                     alert("something went wrong")
@@ -104,7 +104,7 @@ function UserModal() {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" onClick={() => Navigate(-1)}>Close</button>
-                            <button type="button" className="btn btn-primary">Save changes</button>
+                            <button type="submit" className="btn btn-primary" value={"submit"}>Save changes</button>
                         </div>
                     </form>
                 </div>
