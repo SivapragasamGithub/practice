@@ -3,9 +3,10 @@ const app = express();
 const { MongoClient } = require("mongodb");
 // const mongodbClient = mongodb.MongoClient;
 const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
 
-const URL =
-  "mongodb+srv://siva15:admin123@cluster1.f0cox.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1";
+const URL = process.env.DB;
 
 //Middleware
 app.use(
@@ -82,6 +83,36 @@ app.get("/users", async (req, res) => {
     });
   }
 });
+
+app.post("/register", async (req, res) => {
+  try {
+    //1.connect the DB server
+    const connection = new MongoClient(URL);
+    await connection.connect();
+    //2.select the DB
+
+    const db = connection.db("marketplace");
+
+    //3.select the collection
+
+    const collection = db.collection("Userlist");
+
+    //do the operation
+    await collection.insertOne(req.body);
+
+    //close the collection
+    await connection.close();
+
+    res.json({
+      message: "User created successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "user create error",
+    });
+  }
+});
+
 app.listen(3000, () => {
   console.log("web server is running on port 3000");
 });

@@ -6,3 +6,5 @@ npm install cors(middleware)
 origin is a gateway for to receive Frontend API from
 another middleware app.use(express.json()) for receive req.body from Frontend
 now write mongo db commands fro post from particular route
+npm install -g nodemon
+nodemon
