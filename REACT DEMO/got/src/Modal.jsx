@@ -33,7 +33,7 @@ function Modal() {
         onSubmit: async (values) => {
             try {
                 if (id) {
-                    await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/got/${id}`, values)  
+                    await axios.put(`https://66bf9c5d42533c403146a60d.mockapi.io/got/${id}`, values)
                 } else {
                     await axios.post("https://66bf9c5d42533c403146a60d.mockapi.io/got", values)  //to post the cahracters that we enter
                 }

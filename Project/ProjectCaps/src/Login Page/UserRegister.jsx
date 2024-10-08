@@ -1,7 +1,45 @@
+import axios from 'axios';
+import { useFormik } from 'formik';
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function UserRegister() {
-    
+
+    const navigate = useNavigate();
+
+    const formik = useFormik({
+        initialValues: {
+            username: "",
+            email: "",
+            password: ""
+        },
+        validate: (values) => {
+            let error = {}
+
+            if (values.username == "") {
+                error.username = "please enter a valid user Name"
+            }
+            if (values.email == "" || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                error.email = "Please enter Valid Email"
+            }
+            if (values.password == "" || values.password.length < 8 ) {
+                error.password = "Please enter Valid Password"
+            }
+            return error
+        },
+        onSubmit: async (values) => {
+            // console.log(values);
+            try {
+                const details = await axios.post("http://localhost:3000/userregister", values)
+                // console.log(values);
+                navigate(-1)
+            } catch (error) {
+                alert("something wrong in Userregister")
+            }
+        }
+    })
+
+
     return (
         <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -11,45 +49,45 @@ function UserRegister() {
                             <div className="row justify-content-center">
                                 <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                                     <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-                                    <form className="mx-1 mx-md-4">
+                                    <form onSubmit={formik.handleSubmit}>
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init className="form-outline flex-fill mb-0">
-                                                <input type="text" id="form3Example1c" className="form-control" />
+                                                <input type="text" name='username' value={formik.values.username} onChange={formik.handleChange} className="form-control" placeholder='Enter Username' />
                                                 <label className="form-label" for="form3Example1c">User Name</label>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init className="form-outline flex-fill mb-0">
-                                                <input type="email" id="form3Example3c" className="form-control" />
-                                                <label className="form-label" for="form3Example3c">Your Email</label>
+                                                <input type="email" name='email' value={formik.values.email} onChange={formik.handleChange} placeholder='Enter Email' className="form-control" />
+                                                <label className="form-label" >Your Email</label>
                                             </div>
                                         </div>
                                         <div className="d-flex flex-row align-items-center mb-4">
                                             <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init className="form-outline flex-fill mb-0">
-                                                <input type="password" id="form3Example4c" className="form-control" />
-                                                <label className="form-label" for="form3Example4c">Password</label>
+                                                <input type="password" name='password' value={formik.values.password} onChange={formik.handleChange} placeholder='Enter user Password' className="form-control" />
+                                                <label className="form-label" >Password</label>
                                             </div>
                                         </div>
 
-                                        <div className="d-flex flex-row align-items-center mb-4">
+                                        {/* <div className="d-flex flex-row align-items-center mb-4">
                                             <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div data-mdb-input-init className="form-outline flex-fill mb-0">
                                                 <input type="password" id="form3Example4cd" className="form-control" />
                                                 <label className="form-label" for="form3Example4cd">Repeat your password</label>
                                             </div>
-                                        </div>
+                                        </div> */}
 
-                                        <div className="form-check d-flex justify-content-center mb-5">
+                                        {/* <div className="form-check d-flex justify-content-center mb-5">
                                             <input className="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
                                             <label className="form-check-label" for="form2Example3">
                                                 I agree all statements in <a href="#!">Terms of service</a>
                                             </label>
-                                        </div>
-                                        <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-lg">Register</button>
+                                        </div> */}
+                                        <div className="d-flex justify-content-center">
+                                            <button type="submit" className="btn btn-primary">Register</button>
                                         </div>
                                     </form>
                                 </div>

@@ -4,6 +4,7 @@ const { MongoClient } = require("mongodb");
 // const mongodbClient = mongodb.MongoClient;
 const cors = require("cors");
 const dotenv = require("dotenv");
+const bcrypt = require("bcryptjs");
 dotenv.config();
 
 const URL = process.env.DB;
@@ -84,7 +85,7 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.post("/register", async (req, res) => {
+app.post("/userregister", async (req, res) => {
   try {
     //1.connect the DB server
     const connection = new MongoClient(URL);
@@ -97,11 +98,20 @@ app.post("/register", async (req, res) => {
 
     const collection = db.collection("Userlist");
 
+    //hashing
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
+    // const hashemail = await bcrypt.hash(req.body.email, salt);
+    // console.log(hash);
+    // req.body.email = hashemail;
+    req.body.password = hash;
+
     //do the operation
     await collection.insertOne(req.body);
 
     //close the collection
     await connection.close();
+    // console.log(req.body);
 
     res.json({
       message: "User created successfully",
