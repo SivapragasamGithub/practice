@@ -1,6 +1,10 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 function UserCard({ user }) {
+    console.log(user.skills);
+
     return (
         <div className="container">
             <div className='m-1'>

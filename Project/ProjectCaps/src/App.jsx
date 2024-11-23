@@ -34,7 +34,9 @@ function App() {
             <Route path="/company-register" element={<EmployerReister />} />
             <Route path="/reset-page" element={<ResetPage />} />
             <Route path="/Profile" element={<UserProfile />} />
-            <Route path="usermodal" element={<UserModal/>}/>
+            <Route path="usermodal" element={<UserModal />} />
+            <Route path="usermodal/:id" element={<UserModal />} />
+            <Route path="/Profile/:id" element={<UserProfile />} />
           </Routes>
 
         </BrowserRouter>

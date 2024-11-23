@@ -1,7 +1,4 @@
 import { createContext, useEffect, useState } from "react";
-import UserProfile from "./Profile Page/UserProfile";
-import UserPage from "./HomePage/UserPage";
-import UserCard from "./Cards/UserCard";
 import axios from "axios";
 
 let userContext = createContext();

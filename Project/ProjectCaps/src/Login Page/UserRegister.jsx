@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { useFormik } from 'formik';
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import UserCard from '../Cards/UserCard';
 
 function UserRegister() {
 
     const navigate = useNavigate();
-
+    const { id } = useParams()
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -22,7 +23,7 @@ function UserRegister() {
             if (values.email == "" || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 error.email = "Please enter Valid Email"
             }
-            if (values.password == "" || values.password.length < 8 ) {
+            if (values.password == "" || values.password.length < 8) {
                 error.password = "Please enter Valid Password"
             }
             return error
@@ -30,15 +31,14 @@ function UserRegister() {
         onSubmit: async (values) => {
             // console.log(values);
             try {
-                const details = await axios.post("http://localhost:3000/userregister", values)
-                // console.log(values);
-                navigate(-1)
+                const response = await axios.post("http://localhost:3000/userregister", values)
+                // console.log(values);                
+                navigate("/usermodal")
             } catch (error) {
                 alert("something wrong in Userregister")
             }
         }
     })
-
 
     return (
         <div className="container h-100">

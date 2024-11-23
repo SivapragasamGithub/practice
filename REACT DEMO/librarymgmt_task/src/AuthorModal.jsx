@@ -35,8 +35,8 @@ function AuthorModal() {
         },
         onSubmit: async (values) => {
             try {
-                if (id) { 
-                    await axios.put(`https://66d5f031f5859a704267edf6.mockapi.io/author/${id}`, values); 
+                if (id) {
+                    await axios.put(`https://66d5f031f5859a704267edf6.mockapi.io/author/${id}`, values);
                 } else {
                     await axios.post("https://66d5f031f5859a704267edf6.mockapi.io/author", values);
                 }
@@ -50,7 +50,7 @@ function AuthorModal() {
     const fetchauthorData = async () => {
         if (id) {
             try {
-                const response = await axios.get(`https://66d5f031f5859a704267edf6.mockapi.io/author/${id}`)  
+                const response = await axios.get(`https://66d5f031f5859a704267edf6.mockapi.io/author/${id}`)
                 formik.setValues(response.data)
                 console.log(response.data);
             } catch (error) {
