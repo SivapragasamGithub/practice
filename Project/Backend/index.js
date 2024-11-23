@@ -40,10 +40,14 @@ app.post("/user", async (req, res) => {
     //3.select the collection
 
     const collection = db.collection("candidates");
+    console.log("the requ.body while receiving for model saving:", req.body);
 
     //do the operation
     const result = await collection.insertOne(req.body);
     const createdUser = await collection.findOne({ _id: result.insertedId }); // Fetch the created user
+    console.log("the created user while model saving:", createdUser);
+    console.log("the result while model saving:", result);
+    console.log("the result ID is while model saving:", result.insertedId);
 
     //close the collection
     connection.close();
@@ -134,7 +138,10 @@ app.get("/user/:id", async (req, res) => {
     const collection = db.collection("candidates");
     // Check if the ID is a valid ObjectId
     if (!ObjectId.isValid(req.params.id)) {
-      console.log("Invalid ObjectId format:", req.params.id);
+      console.log(
+        "Invalid ObjectId format while get in user:id:",
+        req.params.id
+      );
       return res.status(400).json({ message: "Invalid User ID format on get" });
     }
 

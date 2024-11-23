@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { useFormik, FieldArray, Formik } from 'formik';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function UserModal() {
     const navigate = useNavigate();
     const { id } = useParams()
-    // console.log("idddddddd on edit iddddddddd:", id);
+    const [users, setUsers] = useState([])
+    console.log("the user for state is:", users);
+
 
     const formik = useFormik({
         initialValues: {
@@ -86,12 +88,14 @@ function UserModal() {
                 if (id) {
                     console.log("id id idid :", id);
 
-                    await axios.put(`http://localhost:3000/user/${id}`, values)
-
+                    const user = await axios.put(`http://localhost:3000/user/${id}`, values)
+                    setUsers(user.data)
                     navigate(`/profile/${id}`)
                 } else {
-                    await axios.post("http://localhost:3000/user", values);
-                    navigate(`/profile/${id}`)
+                    const regiterData = await axios.post("http://localhost:3000/user", values);
+                    console.log("The register Data while model submit:", regiterData);
+                    // navigate(`/profile/${regiterData.data._id}`)
+                    navigate("/login")
                 }
                 // navigate(-1)
 

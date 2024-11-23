@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 function Navbar() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
-    // console.log("the user id is:", localStorage.userId);
-    // console.log("the type of userid is:", typeof (localStorage.userId));
 
     const userId = localStorage.getItem("userId");
 

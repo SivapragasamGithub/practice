@@ -10,6 +10,7 @@ function UserProfile() {
 
   const fetchUser = async () => {
     try {
+      console.log("the id before checking id:", id);
       if (id) {
         console.log("Fetching user with ID:", id);
         const response = await axios.get(`http://localhost:3000/user/${id}`);
@@ -21,18 +22,13 @@ function UserProfile() {
       console.error("Error fetching user data", error);
     }
   };
-  // console.log(id);
 
   useEffect(() => {
     fetchUser();
   }, [id]);
 
-  // Determine the displayed user(s)
   const displayedUsers = candidat?.filter(user => user._id === id);
-  // console.log(displayedUsers);
-  const handleEdit = async () => {
 
-  }
 
   return (
     <div className="container" >
