@@ -28,7 +28,6 @@ app.post("/user", async (req, res) => {
    * 4.do the operation
    * 5.close the collection
    */
-
   try {
     //1.connect the DB server
     const connection = new MongoClient(URL);
@@ -51,7 +50,7 @@ app.post("/user", async (req, res) => {
 
     //close the collection
     connection.close();
-    res.json(createdUser); // Return the created user details, including the ID
+    res.json({ createdUser, _id: result.insertedId }); // Return the created user details, including the ID
     // res.json({
     //   message: "Profile created succesfully",
     //   id: result.insertedId,
@@ -342,6 +341,231 @@ app.post("/login", async (req, res) => {
     if (connection) {
       await connection.close();
     }
+  }
+});
+
+//EMployers
+app.post("/employer", async (req, res) => {
+  /**
+   * 1.connect the DB server
+   * 2.select the DB
+   * 3.select the collection
+   * 4.do the operation
+   * 5.close the collection
+   */
+  try {
+    //1.connect the DB server
+    const connection = new MongoClient(URL);
+    await connection.connect();
+    //2.select the DB
+
+    const db = connection.db("marketplace");
+
+    //3.select the collection
+
+    const collection = db.collection("employer");
+    console.log("the requ.body while receiving for model saving:", req.body);
+
+    //do the operation
+    const result = await collection.insertOne(req.body);
+    const createdemployer = await collection.findOne({
+      _id: result.insertedId,
+    }); // Fetch the created user
+    console.log("the createdemployer while model saving:", createdemployer);
+    console.log("the result while model saving:", result);
+    console.log("the result ID is while model saving:", result.insertedId);
+
+    //close the collection
+    connection.close();
+    res.json({ createdemployer, _id: result.insertedId }); // Return the created user details, including the ID
+    // res.json({
+    //   message: "Profile created succesfully",
+    //   id: result.insertedId,
+    // });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Something went wrong on while post",
+    });
+  }
+  // res.json(req.body);
+  // console.log(req.body);
+});
+
+app.get("/employers", async (req, res) => {
+  try {
+    //1.connect the DB server
+    const connection = new MongoClient(URL);
+    await connection.connect();
+    //2.select the DB
+
+    const db = connection.db("marketplace");
+
+    //3.select the collection
+
+    const collection = db.collection("employer");
+    //do the operation
+    const employers = await collection.find({}).toArray();
+    // console.log(users);
+
+    //close the collection
+    connection.close();
+
+    res.json(employers);
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong on while get employers",
+    });
+  }
+});
+
+app.get("/employer/:id", async (req, res) => {
+  let connection;
+  try {
+    // Connect to MongoDB
+    connection = new MongoClient(URL);
+    await connection.connect();
+    const db = connection.db("marketplace");
+    const collection = db.collection("employer");
+    // Check if the ID is a valid ObjectId
+    if (!ObjectId.isValid(req.params.id)) {
+      console.log(
+        "Invalid ObjectId format while get in employer:id:",
+        req.params.id
+      );
+      return res
+        .status(400)
+        .json({ message: "Invalid employer ID format on get" });
+    }
+
+    console.log("Fetching employer with ID:", req.params.id);
+
+    const employerId = new ObjectId(req.params.id);
+    const updateData = req.body;
+
+    // Convert the string ID to ObjectId for querying
+    const employer = await collection.findOne({ _id: employerId });
+
+    console.log("Fetched User:", employer);
+
+    // Check if user was found
+    if (!employer) {
+      return res.status(404).json({ message: "employer not found" });
+    }
+
+    // Return the found user
+    res.json(employer);
+  } catch (error) {
+    console.error("Error fetching employer:", error);
+    res
+      .status(500)
+      .json({ message: "Something went wrong while fetching employer" });
+  } finally {
+    if (connection) {
+      connection.close();
+    }
+  }
+});
+
+app.put("/employer/:id", async (req, res) => {
+  let connection;
+  try {
+    // Connect to the database
+    connection = new MongoClient(URL);
+    await connection.connect();
+
+    // Select the database and collection
+    const db = connection.db("marketplace");
+    const collection = db.collection("employer");
+    console.log("the req.params.id is:", req.params.id);
+
+    // Validate ObjectId
+    if (!ObjectId.isValid(req.params.id)) {
+      return res
+        .status(400)
+        .json({ message: "Invalid employer ID format on put" });
+    }
+
+    // Update the user profile
+    const employerId = new ObjectId(req.params.id);
+    const updateData = req.body; // Data from the request body
+
+    // Remove any properties that shouldn't be updated (e.g., _id)
+    delete updateData._id;
+    console.log("the update data is:", updateData);
+    console.log("the update id is:", employerId);
+
+    const result = await collection.findOneAndUpdate(
+      { _id: employerId },
+      { $set: updateData }
+    );
+    console.log("the result is:", result);
+
+    // Check if a document was modified
+    if (result.modifiedCount === 0) {
+      return res
+        .status(404)
+        .json({ message: "employer not found or no changes made" });
+    }
+
+    // Fetch the updated user to return
+    const updatedemployer = await collection.findOne({ _id: employerId });
+    console.log("the updateddddd data is:", updatedemployer);
+
+    res.json({
+      message: "User profile updated successfully",
+      user: updatedemployer,
+    });
+  } catch (error) {
+    console.error("Error updating user profile:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while updating employer profile" });
+  } finally {
+    if (connection) {
+      await connection.close();
+    }
+  }
+});
+
+app.post("/employerregister", async (req, res) => {
+  try {
+    //1.connect the DB server
+    const connection = new MongoClient(URL);
+    await connection.connect();
+    //2.select the DB
+
+    const db = connection.db("marketplace");
+
+    //3.select the collection
+
+    const collection = db.collection("Employerlist");
+
+    //hashing
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(req.body.password, salt);
+    // const hashemail = await bcrypt.hash(req.body.email, salt);
+    // console.log(hash);
+    // req.body.email = hashemail;
+    req.body.password = hash;
+
+    //do the operation
+    const registeredemployer = await collection.insertOne(req.body);
+    console.log("the registeredemployer is:", registeredemployer);
+
+    //close the collection
+    await connection.close();
+    // console.log(req.body);
+
+    res.json({
+      message: "employer created successfully",
+      employer: registeredemployer,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "employer create error",
+    });
   }
 });
 

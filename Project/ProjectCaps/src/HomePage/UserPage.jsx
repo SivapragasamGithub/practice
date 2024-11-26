@@ -1,21 +1,20 @@
-import React, { useContext } from 'react'
-import UserCard from '../Cards/UserCard';
-import userContext from '../UserContext';
+import React from "react";
+import UserCard from "../Cards/UserCard";
 
-function UserPage() {
-    const { candidat, setCandidate } = useContext(userContext)
-
+function UserPage({ candidates }) {
     return (
         <div className="container">
-            <div className="column">
-                {
-                    candidat.map(user =>
-                        <UserCard key={name} user={user} />
-                    )
-                }
+            <div className="row">
+                {candidates.length > 0 ? (
+                    candidates.map((user, index) => (
+                        <UserCard key={index} user={user} />
+                    ))
+                ) : (
+                    <p>No candidates found.</p>
+                )}
             </div>
         </div>
-    )
+    );
 }
 
-export default UserPage
+export default UserPage;

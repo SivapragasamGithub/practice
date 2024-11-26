@@ -86,16 +86,15 @@ function UserModal() {
         onSubmit: async (values) => {
             try {
                 if (id) {
-                    console.log("id id idid :", id);
-
                     const user = await axios.put(`http://localhost:3000/user/${id}`, values)
                     setUsers(user.data)
                     navigate(`/profile/${id}`)
                 } else {
                     const regiterData = await axios.post("http://localhost:3000/user", values);
                     console.log("The register Data while model submit:", regiterData);
-                    // navigate(`/profile/${regiterData.data._id}`)
-                    navigate("/login")
+                    const _id = regiterData.data._id
+                    navigate(`/profile/${_id}`)
+                    // navigate("/login")
                 }
                 // navigate(-1)
 

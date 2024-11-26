@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-let userContext = createContext();
+const userContext = createContext();
 
 export const UserProvider = ({ children }) => {
     // const [candidat, setCandidate] = useState([
@@ -119,25 +119,19 @@ export const UserProvider = ({ children }) => {
 
     const [candidat, setCandidate] = useState([]);
     // console.log(candidat);
-
     const getData = async () => {
         // console.log("Before axios");
         try {
             const users = await axios.get("http://localhost:3000/users")
             // console.log(users.data);
-
             setCandidate(users.data)
         } catch (error) {
             alert("something went wrong on get FE")
         }
     }
-
     useEffect(() => {
         getData()
     }, [])
-
-
-
 
     return <userContext.Provider value={{ candidat, setCandidate }}>
         {children}

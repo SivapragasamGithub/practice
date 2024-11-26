@@ -1,31 +1,32 @@
 import React from 'react'
 
-function EmployerCards({ job }) {
+function EmployerCards({ employer }) {
   return (
     <div className="container">
       <div className='m-1'>
         <div className="card text-center">
           <div className="card-header">
-            SONY
+            {employer.company}
           </div>
           <div className="card-body d-flex">
             <div>
-              <img src={job.companyImageLink} style={{ height: "300px", width: "300px", margin: "15px" }} />
+              <img src={employer.photo} style={{ height: "300px", width: "300px", margin: "15px" }} />
             </div>
             <div>
-              <h5 className="card-title"><h2>{job.companyName}</h2></h5>
+              <h5 className="card-title"><h2>{employer.HRname}</h2></h5>
               <h4>Job description</h4>
-              <p className="card-text fw-bold">{job.jobRequirement}</p>
-              <p><h4>Skills needed</h4>
-                <div className='d-flex '>
-                  <div className='column text-start'>
+              <p className="card-text fw-bold">{employer.jobdescription}</p>
+              <p className='fs-3'>Skills needed</p>
+              <div className='d-flex '>
+                <div className='column text-start'>
+                  <ul>
                     {/* Dynamically render skills */}
-                    {job.skillsNeeded.map((skill, index) => (
+                    {employer.skillsneeded.split(',').map((skill, index) => (
                       <li key={index}>{skill}</li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
-              </p>
+              </div>
               <a href="#" className="btn btn-primary">Apply</a>
             </div>
           </div>

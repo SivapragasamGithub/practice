@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Navbar() {
+function Navbar({ onSearch }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [query, setQuery] = useState("");
     const navigate = useNavigate();
 
     const userId = localStorage.getItem("userId");
+
+
 
     // Check authentication state on component mount
     useEffect(() => {
@@ -26,6 +29,15 @@ function Navbar() {
         localStorage.setItem('isAuthenticated', 'true');
         setIsAuthenticated(true);
     };
+
+    const handleInputChange = (e) => {
+        // const value = e.target.value;
+        setQuery(e.target.value);
+        // onSearch(value); // Trigger search dynamically
+    };
+    const handleSearchClick = () => {
+        onSearch(query)
+    }
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary rounded">
@@ -51,32 +63,29 @@ function Navbar() {
                             <Link className="nav-link active" to={"/userpage"}><h4>Candidate</h4></Link>
                         </li>
                     </ul>
-                    <form className="d-flex" role="search">
-
-
-                        {/* Conditionally render buttons */}
-                        {!localStorage.userId ? (
-                            <Link className="btn primary me-2" to="/login" onClick={handleLogin}>
-                                Login
-                            </Link>
-                        ) : (
-                            <>
-                                <Link className="btn primary me-2" to={`/Profile/${userId}`}>Profile</Link>
-                                <button className="btn primary me-2" onClick={handleLogout}>
-                                    Logout
-                                </button>
-
-                            </>
-                        )}
-
+                    <div className="col-lg-3">
                         <input
-                            className="form-control me-2"
-                            type="search"
-                            placeholder="Search"
-                            aria-label="Search"
+                            type="text"
+                            className="form-control "
+                            placeholder="Search candidates by name or skills"
+                            value={query}
+                            onChange={handleInputChange}
                         />
-                        <button className="btn btn-outline-success" type="submit">Search</button>
-                    </form>
+                    </div><>
+                        <button className="btn btn-outline-success m-1" onClick={handleSearchClick} >Search</button></>
+                    {/* Conditionally render buttons */}
+                    {!localStorage.userId ? (
+                        <Link className="btn primary me-2" to="/login" onClick={handleLogin}>
+                            Login
+                        </Link>
+                    ) : (
+                        <>
+                            <Link className="btn primary me-2" to={`/Profile/${userId}`}>Profile</Link>
+                            <button className="btn primary me-2" onClick={handleLogout}>
+                                Logout
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </nav>

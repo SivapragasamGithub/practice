@@ -1,6 +1,4 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
 
 function UserCard({ user }) {
 
@@ -8,7 +6,7 @@ function UserCard({ user }) {
         <div className="container">
             <div className='m-1'>
                 <div className="card text-center">
-                    <div className="card-header">
+                    <div className="card-header fs-3 text-uppercase">
                         {user.name}
                     </div>
                     <div className="card-body d-flex">
@@ -19,22 +17,20 @@ function UserCard({ user }) {
                             <h5 className="card-title">{user.role}</h5>
                             <p>{user.experience}</p>
                             <p className="card-text">{user.description}</p>
-                            <p><h4>Skills</h4>
-                                <div className='d-flex '>
-                                    <div className='column text-start'>
-                                        <ul>
-                                            {/* Dynamically render skills */}
-                                            {user.skills.split(',').map((skill, index) => (
-                                                <li key={index}>{skill}</li>
-                                            ))}
-                                        </ul>
-                                    </div>
+                            <p className='fs-3'>Skills</p>
+                            <div className='d-flex '>
+                                <div className='column text-start'>
+                                    <ul>
+                                        {/* Dynamically render skills */}
+                                        {user.skills.split(',').map((skill, index) => (
+                                            <li key={index}>{skill}</li>
+                                        ))}
+                                    </ul>
                                 </div>
-                            </p>
+                            </div>
                             <a href="#" className="btn btn-primary m-3">Hire</a>
                             <a href="#" className="btn btn-primary m-3">View</a>
                         </div>
-
                     </div>
                     <div className="card-footer text-body-secondary text-end ">
                         <div className='d-flex'>
