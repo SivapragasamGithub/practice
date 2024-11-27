@@ -87,6 +87,7 @@ function UserModal() {
             try {
                 if (id) {
                     const user = await axios.put(`http://localhost:3000/user/${id}`, values)
+                    console.log("bfgbvdfs:", user.data);
                     setUsers(user.data)
                     navigate(`/profile/${id}`)
                 } else {
@@ -96,9 +97,6 @@ function UserModal() {
                     navigate(`/profile/${_id}`)
                     // navigate("/login")
                 }
-                // navigate(-1)
-
-
             } catch (error) {
                 alert("Something went wrong");
             }
@@ -108,9 +106,9 @@ function UserModal() {
         if (id) {
             try {
                 const response = await axios.get(`http://localhost:3000/user/${id}`)
-                formik.setValues(response.data)
-                // console.log("fetch user data is after edit:", response.data);
-
+                const user = response.data.user
+                const review = response.data.reviews
+                formik.setValues(user)
             } catch (error) {
                 alert("Failed to fetch character data")
             }

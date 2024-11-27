@@ -14,6 +14,7 @@ import UserModal from "./Profile Page/UserModal"
 import { useContext, useState } from "react"
 import EmployerModal from "./Profile Page/EmployerModal"
 import employersContext, { EmployersProvider } from "./EmployersContext"
+import EmployerProfile from "./Profile Page/EmployerProfile"
 function App() {
   const { candidat } = useContext(userContext); // Access candidates from the context
   const { employer } = useContext(employersContext);
@@ -39,7 +40,7 @@ function App() {
     });
     setFilteredCandidates(results);
   };
-  
+
   const handleemployerSearch = (query) => {
     const results = employer.filter((employers) => {
       // Ensure skills is treated as an array
@@ -75,11 +76,14 @@ function App() {
               <Route path="/company-register" element={<EmployerReister />} />
               <Route path="/reset-page" element={<ResetPage />} />
               <Route path="/Profile" element={<UserProfile />} />
+              <Route path="/employerProfile" element={<EmployerProfile />} />
               <Route path="usermodal" element={<UserModal />} />
               <Route path="employermodal" element={<EmployerModal />} />
               <Route path="usermodal/:id" element={<UserModal />} />
               <Route path="employermodal/:id" element={<EmployerModal />} />
               <Route path="/Profile/:id" element={<UserProfile />} />
+              <Route path="/employerProfile/:id" element={<EmployerProfile />} />
+
             </Routes>
           </BrowserRouter>
         </EmployersProvider>

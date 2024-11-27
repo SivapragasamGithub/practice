@@ -13,8 +13,8 @@ function EmployerCards({ employer }) {
               <img src={employer.photo} style={{ height: "300px", width: "300px", margin: "15px" }} />
             </div>
             <div>
-              <h5 className="card-title"><h2>{employer.HRname}</h2></h5>
-              <h4>Job description</h4>
+              <h6 className="card-title">{employer.HRname}</h6>
+              <p className='fs-3'>Job description</p>
               <p className="card-text fw-bold">{employer.jobdescription}</p>
               <p className='fs-3'>Skills needed</p>
               <div className='d-flex '>

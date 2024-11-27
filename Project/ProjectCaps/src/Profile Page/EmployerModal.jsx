@@ -68,12 +68,12 @@ function EmployerModal() {
                 if (id) {
                     const employer = await axios.put(`http://localhost:3000/employer/${id}`, values)
                     setemployers(employer.data)
-                    navigate(`/profile/${id}`)
+                    navigate(`/employerProfile/${id}`)
                 } else {
                     const regiterData = await axios.post("http://localhost:3000/employer", values);
                     console.log("The register Data while model submit:", regiterData);
                     const _id = regiterData.data._id
-                    navigate(`/profile/${_id}`)
+                    navigate(`/employerProfile/${_id}`)
                 }
             } catch (error) {
                 alert("Something went wrong");

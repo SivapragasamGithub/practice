@@ -1,5 +1,6 @@
 import React from "react";
 import UserCard from "../Cards/UserCard";
+import Reviews from "../Reviews";
 
 function UserPage({ candidates }) {
     return (
@@ -7,7 +8,7 @@ function UserPage({ candidates }) {
             <div className="row">
                 {candidates.length > 0 ? (
                     candidates.map((user, index) => (
-                        <UserCard key={index} user={user} />
+                        <UserCard key={index} user={user} candidates={candidates} />
                     ))
                 ) : (
                     <p>No candidates found.</p>

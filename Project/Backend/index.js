@@ -1,14 +1,30 @@
 const express = require("express");
 const app = express();
+const mongodb = require("mongodb");
 const { MongoClient, ObjectId } = require("mongodb");
 // const mongodbClient = mongodb.MongoClient;
 const cors = require("cors");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const nodemailer = require("nodemailer");
+
 dotenv.config();
 
 const URL = process.env.DB;
+const EMAIL_USER = process.env.EMAIL_USER;
+const EMAIL_PASS = process.env.EMAIL_PASS;
+
+// Nodemailer transporter
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: EMAIL_USER, // Replace with your email
+    pass: EMAIL_PASS, // Replace with your app-specific password
+  },
+});
+
 const SECRET_KEY =
   "JSON123WEBTOKEN456SECREET789KEYjson123webtoken456secret789key";
 
@@ -135,7 +151,9 @@ app.get("/user/:id", async (req, res) => {
     await connection.connect();
     const db = connection.db("marketplace");
     const collection = db.collection("candidates");
-    // Check if the ID is a valid ObjectId
+    const Reviewcollection = db.collection("reviews");
+    // Check if the ID is a valid ObjectId    const collection = db.collection("candidates");
+
     if (!ObjectId.isValid(req.params.id)) {
       console.log(
         "Invalid ObjectId format while get in user:id:",
@@ -148,19 +166,21 @@ app.get("/user/:id", async (req, res) => {
 
     const userId = new ObjectId(req.params.id);
     const updateData = req.body;
-
+    // const { freelancerId } = req.params;
     // Convert the string ID to ObjectId for querying
     const user = await collection.findOne({ _id: userId });
-
     console.log("Fetched User:", user);
 
     // Check if user was found
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
+    const reviews = await Reviewcollection.find({
+      freelancerId: userId,
+    }).toArray();
     // Return the found user
-    res.json(user);
+
+    res.json({ user, reviews });
   } catch (error) {
     console.error("Error fetching user:", error);
     res
@@ -240,99 +260,86 @@ app.post("/userregister", async (req, res) => {
   }
 });
 
-//Login
-
 app.post("/login", async (req, res) => {
   let connection;
   try {
-    // 1. Connect to the database server
     connection = new MongoClient(URL);
     await connection.connect();
 
-    // 2. Select the database and the relevant collections
     const db = connection.db("marketplace");
     const userListCollection = db.collection("Userlist");
     const candidatesCollection = db.collection("candidates");
+    const employerListCollection = db.collection("Employerlist");
+    const employersCollection = db.collection("employer");
 
-    /**
-//      * find the user by emailid
-//      * If user Not found throw err
-//      *
-//      * If user found?
-//      * check the attempt.If the attempt is less tha 3 then proceed
-//      * hash the given password
-//      * compare the given hash with DB hash
-//      * if hash not same
-//      * increment the attempt
-//      * and throw err
-//      *
-//      * if hash is same
-//      * genrate token
-//      */
+    // Check if the user is in the Employerlist
+    const employer = await employerListCollection.findOne({
+      email: req.body.email,
+    });
+    if (employer) {
+      const passwordCorrect = await bcrypt.compare(
+        req.body.password,
+        employer.password
+      );
+      if (!passwordCorrect) {
+        return res
+          .status(401)
+          .json({ message: "Incorrect username or password" });
+      }
 
-    // 3. Find the user by email in the Userlist collection
+      // Fetch employer details
+      const employerDetails = await employersCollection.findOne({
+        email: employer.email,
+      });
+      if (!employerDetails) {
+        return res.status(404).json({ message: "Employer not found" });
+      }
+
+      const token = jwt.sign(
+        { id: employerDetails._id.toString() },
+        SECRET_KEY
+      );
+      return res.json({
+        message: "Employer login successful",
+        userType: "employer",
+        token,
+        email: employerDetails.email,
+        _id: employerDetails._id,
+        profile: employerDetails,
+      });
+    }
+
+    // If not found in Employerlist, check the Userlist
     const user = await userListCollection.findOne({ email: req.body.email });
-    console.log("User found in Userlist:", user);
-
-    // Check if user exists
     if (!user) {
       return res
         .status(404)
         .json({ message: "Incorrect username or password" });
     }
 
-    // 4. Check if the entered password matches the hashed password
     const passwordCorrect = await bcrypt.compare(
       req.body.password,
       user.password
     );
-    console.log("Entered password:", req.body.password);
-    console.log("Stored password hash:", user.password);
-
     if (!passwordCorrect) {
-      // Increment the attempt count if the password is incorrect
-      if (user.attempt >= 3) {
-        return res.status(403).json({ message: "Attempt exceeded" });
-      }
-
-      await userListCollection.updateOne(
-        { email: req.body.email },
-        { $inc: { attempt: 1 } }
-      );
-
       return res
         .status(401)
         .json({ message: "Incorrect username or password" });
     }
 
-    // 5. Reset attempts on successful login
-    await userListCollection.updateOne(
-      { email: req.body.email },
-      { $set: { attempt: 0 } }
-    );
-
-    // 6. Fetch the candidate profile using the email
     const candidate = await candidatesCollection.findOne({ email: user.email });
-    console.log("Candidate found in candidates collection:", candidate);
-
     if (!candidate) {
       return res.status(404).json({ message: "Candidate not found" });
     }
 
-    // 7. Generate a JWT token with the candidate's ID
     const token = jwt.sign({ id: candidate._id.toString() }, SECRET_KEY);
-    console.log("Generated token:", token);
-
-    // 8. Close the database connection
-    await connection.close();
-
-    // 9. Return the response with the candidate's details
     return res.json({
-      message: "Login successful",
-      token: token,
+      message: "Candidate login successful",
+      userType: "candidate",
+      token,
       email: candidate.email,
       _id: candidate._id,
-      profile: candidate, // Optional: Send entire candidate profile if needed
+      profile: candidate,
     });
   } catch (error) {
     console.error("Error during login:", error);
@@ -341,6 +348,71 @@ app.post("/login", async (req, res) => {
     if (connection) {
       await connection.close();
     }
+  }
+});
+
+// Password reset route
+app.post("/reset-password", async (req, res) => {
+  const { email } = req.body;
+  console.log(req.body);
+
+  // 1. Connect to the DB server
+  const client = new MongoClient(URL);
+  try {
+    await client.connect();
+
+    // 2. Select the DB
+    const db = client.db("marketplace");
+
+    // 3. Check the `userlist` collection first
+    let account = db.collection("userlist").find({ email });
+    let accountType = "user";
+
+    // 4. If not found in `userlist`, check the `Employerlist` collection
+    if (!account) {
+      account = db.collection("Employerlist").find({ email });
+      accountType = account ? "employer" : null;
+    }
+
+    if (!account) {
+      return res
+        .status(404)
+        .json({ message: "Email not found in our records." });
+    }
+
+    // Generate a password reset token
+    const resetToken = crypto.randomBytes(32).toString("hex");
+    const hashedToken = await bcrypt.hash(resetToken, 10);
+
+    // Update the reset token in the corresponding collection
+    const updateQuery = { email };
+    const updateData = {
+      $set: { resetToken: hashedToken, tokenExpiry: Date.now() + 3600000 },
+    }; // Token expires in 1 hour
+
+    if (accountType === "user") {
+      await db.collection("userlist").updateOne(updateQuery, updateData);
+    } else if (accountType === "employer") {
+      await db.collection("Employerlist").updateOne(updateQuery, updateData);
+    }
+
+    // Send password reset email
+    const resetLink = `http://your-frontend-url/reset-password?token=${resetToken}`;
+    await transporter.sendMail({
+      from: "your-email@gmail.com",
+      to: email,
+      subject: "Password Reset",
+      text: `Click the link to reset your password: ${resetLink}`,
+      html: `<p>Click the link to reset your password: <a href="${resetLink}">Reset Password</a></p>`,
+    });
+
+    res.json({ message: "Password reset email sent successfully." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error." });
+  } finally {
+    // 5. Close the connection
+    await client.close();
   }
 });
 
@@ -447,7 +519,7 @@ app.get("/employer/:id", async (req, res) => {
     // Convert the string ID to ObjectId for querying
     const employer = await collection.findOne({ _id: employerId });
 
-    console.log("Fetched User:", employer);
+    console.log("Fetched employer:", employer);
 
     // Check if user was found
     if (!employer) {
@@ -566,6 +638,92 @@ app.post("/employerregister", async (req, res) => {
     res.status(500).json({
       message: "employer create error",
     });
+  }
+});
+
+//Reviews
+app.post("/reviews", async (req, res) => {
+  try {
+    const connection = new MongoClient(URL);
+    await connection.connect();
+
+    const db = connection.db("marketplace");
+    const collection = db.collection("reviews");
+
+    const { freelancerId, clientId, rating, comment } = req.body;
+
+    const review = {
+      freelancerId: new ObjectId(freelancerId),
+      clientId: new ObjectId(clientId),
+      rating,
+      comment,
+      response: null, // No response yet
+      createdAt: new Date(),
+    };
+
+    const result = await collection.insertOne(review);
+    const createdReview = await collection.findOne({ _id: result.insertedId });
+
+    connection.close();
+
+    res
+      .status(201)
+      .json({ message: "Review added successfully", review: createdReview });
+  } catch (error) {
+    console.error("Error adding review:", error);
+    res.status(500).json({ message: "Failed to add review" });
+  }
+});
+
+app.put("/reviews/:reviewId", async (req, res) => {
+  try {
+    const connection = new MongoClient(URL);
+    await connection.connect();
+
+    const db = connection.db("marketplace");
+    const collection = db.collection("reviews");
+
+    const { reviewId } = req.params;
+    const { response } = req.body;
+
+    const updatedReview = await collection.findOneAndUpdate(
+      { _id: new ObjectId(reviewId) },
+      { $set: { response } },
+      { returnDocument: "after" } // Return the updated document
+    );
+
+    connection.close();
+
+    res.json({
+      message: "Response added successfully",
+      review: updatedReview.value,
+    });
+  } catch (error) {
+    console.error("Error adding response:", error);
+    res.status(500).json({ message: "Failed to add response" });
+  }
+});
+
+app.get("/freelancers/:freelancerId/reviews", async (req, res) => {
+  try {
+    const connection = new MongoClient(URL);
+    await connection.connect();
+
+    const db = connection.db("marketplace");
+    const collection = db.collection("reviews");
+
+    const { freelancerId } = req.params;
+
+    const reviews = await collection
+      .find({ freelancerId: new ObjectId(freelancerId) })
+      .toArray();
+
+    connection.close();
+
+    res.json({ reviews });
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    res.status(500).json({ message: "Failed to fetch reviews" });
   }
 });
 

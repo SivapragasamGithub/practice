@@ -1,7 +1,7 @@
 import React from "react";
 import "../Login Page/Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import axios from "axios";
 
@@ -28,17 +28,22 @@ function Login() {
                 const response = await axios.post("http://localhost:3000/login", values);
 
                 if (response.status === 200) {
-                    const { message, email, _id } = response.data;
+                    const { token, email, _id, userType } = response.data;
 
                     // Store token and user information in localStorage
-                    localStorage.setItem("authToken", message);
+                    localStorage.setItem("authToken", token);
                     localStorage.setItem("userEmail", email);
                     localStorage.setItem("userId", _id);
-                    console.log("the type of_id is:", typeof (_id));
-
+                    localStorage.setItem("userType", userType);
 
                     alert("Login successful!");
-                    navigate(`/Profile/${_id}`); // Redirect to Profile page
+
+                    // Redirect to the respective profile page
+                    if (userType === "employer") {
+                        navigate(`/employerProfile/${_id}`);
+                    } else if (userType === "candidate") {
+                        navigate(`/Profile/${_id}`);
+                    }
                 }
             } catch (error) {
                 if (error.response && error.response.data.message) {
@@ -57,9 +62,7 @@ function Login() {
                 <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div className="card border-0 shadow rounded-3 my-5">
                         <div className="card-body p-4 p-sm-5">
-                            <h5 className="card-title text-center text-uppercase mb-5 fw-bold fs-5">
-                                Sign In
-                            </h5>
+                            <h5 className="card-title text-center text-uppercase mb-5 fw-bold fs-5">Sign In</h5>
                             <form onSubmit={formik.handleSubmit}>
                                 <div className="form-floating mb-3">
                                     <input
@@ -97,45 +100,19 @@ function Login() {
                                     </button>
                                 </div>
                                 <div className="d-flex justify-content-center">
-                                    <Link
-                                        className="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold mt-3 link-underline-primary border border-primary p-2"
-                                        to="/user-register"
-                                    >
+                                    <Link className="fw-bold mt-3" to="/user-register">
                                         Candidate Sign up
                                     </Link>
                                 </div>
                                 <div className="d-flex justify-content-center">
-                                    <Link
-                                        className="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold mt-2 link-underline-primary border border-primary p-2"
-                                        to="/Company-register"
-                                    >
+                                    <Link className="fw-bold mt-2" to="/Company-register">
                                         Employer Sign up
                                     </Link>
                                 </div>
                                 <div className="d-flex justify-content-center">
-                                    <Link
-                                        className="link-underline link-underline-opacity-0 link-underline-opacity-75-hover fw-bold m-3"
-                                        to={"/reset-page"}
-                                    >
+                                    <Link className="fw-bold m-3" to="/reset-page">
                                         Reset Password
                                     </Link>
-                                </div>
-                                <hr className="my-4" />
-                                <div className="d-grid mb-2">
-                                    <button
-                                        className="btn btn-google btn-login text-uppercase fw-bold"
-                                        type="button"
-                                    >
-                                        <i className="fab fa-google me-2"></i> Sign in with Google
-                                    </button>
-                                </div>
-                                <div className="d-grid">
-                                    <button
-                                        className="btn btn-facebook btn-login text-uppercase fw-bold"
-                                        type="button"
-                                    >
-                                        <i className="fab fa-facebook-f me-2"></i> Sign in with Facebook
-                                    </button>
                                 </div>
                             </form>
                         </div>
