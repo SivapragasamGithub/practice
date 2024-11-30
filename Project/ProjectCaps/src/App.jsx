@@ -16,14 +16,13 @@ import EmployerModal from "./Profile Page/EmployerModal"
 import employersContext, { EmployersProvider } from "./EmployersContext"
 import EmployerProfile from "./Profile Page/EmployerProfile"
 function App() {
-  const { candidat } = useContext(userContext); // Access candidates from the context
+  const { candidat } = useContext(userContext);
   const { employer } = useContext(employersContext);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [filteredemployers, setfilteredemployers] = useState([]);
 
   const handleSearch = (query) => {
     const results = candidat.filter((candidate) => {
-      // Ensure skills is treated as an array
       const skillsArray = typeof candidate.skills === "string"
         ? candidate.skills.split(",").map((skill) => skill.trim().toLowerCase())
         : [];
@@ -39,11 +38,10 @@ function App() {
       return skillsMatch || nameMatch;
     });
     setFilteredCandidates(results);
+    
   };
-
   const handleemployerSearch = (query) => {
     const results = employer.filter((employers) => {
-      // Ensure skills is treated as an array
       const skillsArray = typeof employers.skills === "string"
         ? employers.skills.split(",").map((skill) => skill.trim().toLowerCase())
         : [];

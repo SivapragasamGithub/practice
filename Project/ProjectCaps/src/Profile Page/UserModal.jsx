@@ -106,6 +106,7 @@ function UserModal() {
         if (id) {
             try {
                 const response = await axios.get(`http://localhost:3000/user/${id}`)
+                console.log("thresponse after usermodal edited from back end is:", response.data.user);
                 const user = response.data.user
                 const review = response.data.reviews
                 formik.setValues(user)
@@ -121,7 +122,6 @@ function UserModal() {
     }, [id]);
     return (
         <Formik >
-
             <div className="modal" style={{ display: "block" }}>
                 <div className="modal-dialog" role='document'>
                     <div className="modal-content" style={{ width: "500px" }}>

@@ -4,44 +4,40 @@ import { Link, useNavigate } from "react-router-dom";
 function Navbar({ onSearch }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [query, setQuery] = useState("");
+    const [searchType, setSearchType] = useState("candidates"); // Default search for candidates
     const navigate = useNavigate();
 
     const userId = localStorage.getItem("userId");
-    const userType = localStorage.getItem("userType"); // Fetch user type
-
+    const userType = localStorage.getItem("userType");
     // Check authentication state on component mount
     useEffect(() => {
         const authStatus = localStorage.getItem("isAuthenticated");
         setIsAuthenticated(authStatus === "true");
     }, []);
-
     const handleLogout = () => {
         // Clear localStorage and reset authentication state
         localStorage.clear();
         setIsAuthenticated(false);
-        navigate("/login"); // Redirect to login page
+        navigate("/login");
     };
-
     const handleInputChange = (e) => {
         setQuery(e.target.value);
     };
-
     const handleSearchClick = () => {
         if (onSearch) {
-            onSearch(query); // Trigger search functionality
+            onSearch(query, searchType);
         }
     };
 
     const handleProfile = () => {
         if (userType === "employer") {
-            navigate(`/employerProfile/${userId}`); // Redirect to employer profile
+            navigate(`/employerProfile/${userId}`);
         } else if (userType === "candidate") {
-            navigate(`/Profile/${userId}`); // Redirect to candidate profile
+            navigate(`/Profile/${userId}`);
         } else {
             alert("User type not identified. Please log in again.");
         }
     };
-
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary rounded">
             <div className="container-fluid">
@@ -72,11 +68,25 @@ function Navbar({ onSearch }) {
                             </Link>
                         </li>
                     </ul>
-                    <div className="col-lg-3">
+                    <div className="col-lg-3 d-flex align-items-center">
+                        {/* Dropdown for Search Type */}
+                        <select
+                            className="form-select me-2"
+                            value={searchType}
+                            onChange={(e) => setSearchType(e.target.value)}
+                        >
+                            <option value="candidates">Candidates</option>
+                            <option value="employers">Employers</option>
+                        </select>
+                        {/* Search Bar */}
                         <input
                             type="text"
                             className="form-control"
-                            placeholder="Search candidates by name or skills"
+                            placeholder={
+                                searchType === "candidates"
+                                    ? "Search candidates by name or skills"
+                                    : "Search employers by company or skills"
+                            }
                             value={query}
                             onChange={handleInputChange}
                         />

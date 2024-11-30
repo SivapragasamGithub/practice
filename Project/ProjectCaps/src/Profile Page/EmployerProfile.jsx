@@ -1,26 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react'
-import employersContext from '../EmployersContext';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useContext, useEffect, useState } from "react";
+import employersContext from "../EmployersContext";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 function EmployerProfile() {
-
   const { employer } = useContext(employersContext);
   const { id } = useParams();
-  const [employerDetail, setemployerDetail] = useState([]);
+  const [employerDetail, setEmployerDetail] = useState(null);
 
   const fetchEmployer = async () => {
     try {
-      console.log("the id before checking id:", id);
       if (id) {
         console.log("Fetching employer with ID:", id);
         const response = await axios.get(`http://localhost:3000/employer/${id}`);
-        setemployerDetail(response.data);
-        console.log("Response from employer profile get after API req:", response.data);
-
+        setEmployerDetail(response.data);
+        console.log("Employer data fetched:", response.data);
       }
     } catch (error) {
-      console.error("Error fetching employer data", error);
+      console.error("Error fetching employer data:", error);
     }
   };
 
@@ -28,89 +25,63 @@ function EmployerProfile() {
     fetchEmployer();
   }, [id]);
 
-  const displayedemployers = employer?.filter(employer => employer._id === id);
-
   return (
-    <div className="container" >
-      {
-        id && displayedemployers ? displayedemployers.map((employer) => (
-          <div key={employer._id} className="container m-3">
-            <div className="card mb-3" style={{ maxWidth: "auto", height: "90vh" }}>
-              <div className="row g-1">
-                <div className='row-md-4 d-flex justify-content-center md-3 m-3'>
-                  <Link className='btn btn-primary d-flex justify-content-center' to={'/employermodal'}>Create</Link>
-                </div>
-                <div className="col-md-4 mt-8">
-                  <img src={employer.photo} className="img-fluid rounded-start" alt="..." />
-                </div>
-                <div className="col-md-8">
-                  <div className="card-body">
-                    <p>company: {employer.company}</p>
-                    <p>HRname: {employer.HRname}</p>
-                    <p>Email: {employer.email}</p>
-                    <p>Phone Number: {employer.PhoneNumber}</p>
-                    <p>jobdescription: {employer.jobdescription}</p>
-                    <p>experiencerequired: {employer.experiencerequired}</p>
-                    <p>skillsneeded: {employer.skillsneeded}</p>
-                    <p>Role: {employer.role}</p>
-                    {/* <div className='d-flex'>
-                      <div className='column text-start'>
-                        {employer.projects && employer.projects.length > 0 ? (
-                          employer.projects.map((project, index) => (
-                            <div key={index}>
-                              <p>projectName:  {project.projectName}</p>
-                              <p>projectDescription:  {project.projectDescription}</p>
-                              <a href={project.projectLink} target="_blank" rel="noopener noreferrer">Project Link</a>
-                            </div>
-                          ))
-                        ) : (
-                          <p>No projects available</p>
-                        )}
-                      </div>
-                    </div> */}
-                  </div>
-                  <Link className='btn btn-primary m-1' to={`/employermodal/${employer._id}`}>Edit</Link>
-                  <button className='btn btn-primary m-1'>Save</button>
+    <div className="container">
+      {employerDetail ? (
+        <div className="container m-3">
+          <div className="card mb-3" style={{ maxWidth: "auto", height: "auto" }}>
+            <div className="container d-flex justify-content-center">
+              <Link
+                className="btn btn-primary m-1"
+                to={`/employermodal/${employerDetail._id}`}
+              >
+                Edit
+              </Link>
+            </div>
+            <div className="row g-1">
+              <div className="col-md-4 mt-8">
+                <img
+                  src={employerDetail.photo}
+                  className="img-fluid rounded-start"
+                  alt={employerDetail.company}
+                />
+              </div>
+              <div className="col-md-8">
+                <div className="card-body">
+                  <p>
+                    <strong>Company:</strong> {employerDetail.company}
+                  </p>
+                  <p>
+                    <strong>HR Name:</strong> {employerDetail.HRname}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {employerDetail.email}
+                  </p>
+                  <p>
+                    <strong>Phone Number:</strong> {employerDetail.PhoneNumber}
+                  </p>
+                  <p>
+                    <strong>Job Description:</strong> {employerDetail.jobdescription}
+                  </p>
+                  <p>
+                    <strong>Experience Required:</strong> {employerDetail.experiencerequired}
+                  </p>
+                  <p>
+                    <strong>Skills Needed:</strong> {employerDetail.skillsneeded}
+                  </p>
+                  <p>
+                    <strong>Role:</strong> {employerDetail.role}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-        )
-          // If an ID is provided and a employer is found, show only that employer
-
-        ) : (
-          // If no ID or no employer found, display all users
-          employer.map((employer) => (
-            <div key={employer._id} className="container m-3">
-              <div className="card mb-3" style={{ maxWidth: "auto", height: "90vh" }}>
-                <div className="row g-1">
-                  <div className='row-md-4 d-flex justify-content-center md-3 m-3'>
-                    <Link className='btn btn-primary d-flex justify-content-center' to={'/employermodal'}>Create</Link>
-                  </div>
-                  <div className="col-md-4 mt-8">
-                    <img src={employer.photo} className="img-fluid rounded-start" alt="..." />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <p>company: {employer.company}</p>
-                      <p>HRname: {employer.HRname}</p>
-                      <p>Email: {employer.email}</p>
-                      <p>Phone Number: {employer.PhoneNumber}</p>
-                      <p>jobdescription: {employer.jobdescription}</p>
-                      <p>experiencerequired: {employer.experiencerequired}</p>
-                      <p>skillsneeded: {employer.skillsneeded}</p>
-                      <p>Role: {employer.role}</p>
-                    </div>
-                    {/* <Link className='btn btn-primary m-1' to={`/usermodal/${employer._id}`}>Edit</Link> */}
-                    <button className='btn btn-primary m-1'>Save</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 }
 
-export default EmployerProfile
+export default EmployerProfile;

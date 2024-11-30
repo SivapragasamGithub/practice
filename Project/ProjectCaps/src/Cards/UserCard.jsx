@@ -56,25 +56,25 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 function UserCard({ user }) {
-    const [reviews, setReviews] = useState([]); // State to store reviews
-    const [rating, setRating] = useState(0); // Rating state for new review
-    const [comment, setComment] = useState(""); // Comment state for new review
-    const [userType, setUserType] = useState(""); // Store the current user's type (employer or candidate)
+    const [reviews, setReviews] = useState([]);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
+    const [userType, setUserType] = useState("");
     const navigate = useNavigate();
     const { id } = useParams
 
     // Check if the current user is a candidate or an employer
     useEffect(() => {
-        const currentUserType = localStorage.getItem("userType"); // Assuming userType is stored in localStorage
+        const currentUserType = localStorage.getItem("userType");
         setUserType(currentUserType);
     }, []);
 
-    // Fetch reviews for the user (freelancer) on component mount
+
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/freelancers/${user._id}/reviews`); // Fetch reviews for this freelancer
-                setReviews(response.data.reviews || []); // Set the fetched reviews
+                const response = await axios.get(`http://localhost:3000/freelancers/${user._id}/reviews`);
+                setReviews(response.data.reviews || []);
             } catch (error) {
                 console.error("Error fetching reviews:", error);
             }
@@ -93,12 +93,12 @@ function UserCard({ user }) {
         try {
             const reviewData = {
                 freelancerId: user._id,
-                clientId: localStorage.getItem("userId"), // Assuming the logged-in user's ID is stored in localStorage
+                clientId: localStorage.getItem("userId"),
                 rating,
                 comment,
             };
 
-            const response = await axios.post("http://localhost:3000/reviews", reviewData); // POST the new review
+            const response = await axios.post("http://localhost:3000/reviews", reviewData);
 
             if (response.data) {
                 // Update the reviews list with the new review
@@ -135,7 +135,6 @@ function UserCard({ user }) {
                             <div className="d-flex">
                                 <div className="column text-start">
                                     <ul>
-                                        {/* Dynamically render skills */}
                                         {user.skills.split(",").map((skill, index) => (
                                             <li key={index}>{skill}</li>
                                         ))}
@@ -150,8 +149,6 @@ function UserCard({ user }) {
                             </button> */}
                         </div>
                     </div>
-
-                    {/* Display reviews and ratings */}
                     <div className="card-footer text-body-secondary text-start">
                         <h5 className="mt-3">Reviews and Ratings:</h5>
                         {reviews.length > 0 ? (
@@ -173,7 +170,6 @@ function UserCard({ user }) {
                         ) : (
                             <p>No reviews available yet.</p>
                         )}
-
                         {/* Display review form for candidates only */}
                         {userType === "employer" && (
                             <div className="mt-3">

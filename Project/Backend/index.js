@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const mongodb = require("mongodb");
 const { MongoClient, ObjectId } = require("mongodb");
-// const mongodbClient = mongodb.MongoClient;
 const cors = require("cors");
 const dotenv = require("dotenv");
 const bcrypt = require("bcryptjs");
@@ -20,8 +19,8 @@ const EMAIL_PASS = process.env.EMAIL_PASS;
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: EMAIL_USER, // Replace with your email
-    pass: EMAIL_PASS, // Replace with your app-specific password
+    user: EMAIL_USER,
+    pass: EMAIL_PASS,
   },
 });
 
@@ -49,24 +48,20 @@ app.post("/user", async (req, res) => {
     const connection = new MongoClient(URL);
     await connection.connect();
     //2.select the DB
-
     const db = connection.db("marketplace");
-
     //3.select the collection
-
     const collection = db.collection("candidates");
     console.log("the requ.body while receiving for model saving:", req.body);
-
     //do the operation
     const result = await collection.insertOne(req.body);
-    const createdUser = await collection.findOne({ _id: result.insertedId }); // Fetch the created user
+    const createdUser = await collection.findOne({ _id: result.insertedId });
     console.log("the created user while model saving:", createdUser);
     console.log("the result while model saving:", result);
     console.log("the result ID is while model saving:", result.insertedId);
 
     //close the collection
     connection.close();
-    res.json({ createdUser, _id: result.insertedId }); // Return the created user details, including the ID
+    res.json({ createdUser, _id: result.insertedId });
     // res.json({
     //   message: "Profile created succesfully",
     //   id: result.insertedId,
@@ -78,11 +73,7 @@ app.post("/user", async (req, res) => {
       message: "Something went wrong on while post",
     });
   }
-  // res.json(req.body);
-  // console.log(req.body);
 });
-
-// //put option
 
 app.put("/user/:id", async (req, res) => {
   let connection;
@@ -103,13 +94,11 @@ app.put("/user/:id", async (req, res) => {
 
     // Update the user profile
     const userId = new ObjectId(req.params.id);
-    const updateData = req.body; // Data from the request body
-
-    // Remove any properties that shouldn't be updated (e.g., _id)
+    const updateData = req.body;
+    // Remove any properties that not be updated
     delete updateData._id;
     console.log("the update data is:", updateData);
     console.log("the update id is:", userId);
-
     const result = await collection.findOneAndUpdate(
       { _id: userId },
       { $set: updateData }
@@ -122,7 +111,6 @@ app.put("/user/:id", async (req, res) => {
         .status(404)
         .json({ message: "User not found or no changes made" });
     }
-
     // Fetch the updated user to return
     const updatedUser = await collection.findOne({ _id: userId });
     console.log("the updateddddd data is:", updatedUser);
@@ -152,8 +140,7 @@ app.get("/user/:id", async (req, res) => {
     const db = connection.db("marketplace");
     const collection = db.collection("candidates");
     const Reviewcollection = db.collection("reviews");
-    // Check if the ID is a valid ObjectId    const collection = db.collection("candidates");
-
+    // Check if the ID is a valid ObjectId
     if (!ObjectId.isValid(req.params.id)) {
       console.log(
         "Invalid ObjectId format while get in user:id:",
@@ -163,10 +150,8 @@ app.get("/user/:id", async (req, res) => {
     }
 
     console.log("Fetching user with ID:", req.params.id);
-
     const userId = new ObjectId(req.params.id);
     const updateData = req.body;
-    // const { freelancerId } = req.params;
     // Convert the string ID to ObjectId for querying
     const user = await collection.findOne({ _id: userId });
     console.log("Fetched User:", user);
@@ -178,7 +163,6 @@ app.get("/user/:id", async (req, res) => {
     const reviews = await Reviewcollection.find({
       freelancerId: userId,
     }).toArray();
-    // Return the found user
 
     res.json({ user, reviews });
   } catch (error) {
@@ -195,23 +179,12 @@ app.get("/user/:id", async (req, res) => {
 
 app.get("/users", async (req, res) => {
   try {
-    //1.connect the DB server
     const connection = new MongoClient(URL);
     await connection.connect();
-    //2.select the DB
-
     const db = connection.db("marketplace");
-
-    //3.select the collection
-
     const collection = db.collection("candidates");
-    //do the operation
     const users = await collection.find({}).toArray();
-    // console.log(users);
-
-    //close the collection
     connection.close();
-
     res.json(users);
   } catch (error) {
     res.status(500).json({
@@ -418,13 +391,6 @@ app.post("/reset-password", async (req, res) => {
 
 //EMployers
 app.post("/employer", async (req, res) => {
-  /**
-   * 1.connect the DB server
-   * 2.select the DB
-   * 3.select the collection
-   * 4.do the operation
-   * 5.close the collection
-   */
   try {
     //1.connect the DB server
     const connection = new MongoClient(URL);
@@ -442,14 +408,14 @@ app.post("/employer", async (req, res) => {
     const result = await collection.insertOne(req.body);
     const createdemployer = await collection.findOne({
       _id: result.insertedId,
-    }); // Fetch the created user
+    });
     console.log("the createdemployer while model saving:", createdemployer);
     console.log("the result while model saving:", result);
     console.log("the result ID is while model saving:", result.insertedId);
 
     //close the collection
     connection.close();
-    res.json({ createdemployer, _id: result.insertedId }); // Return the created user details, including the ID
+    res.json({ createdemployer, _id: result.insertedId });
     // res.json({
     //   message: "Profile created succesfully",
     //   id: result.insertedId,
@@ -552,18 +518,15 @@ app.put("/employer/:id", async (req, res) => {
     const collection = db.collection("employer");
     console.log("the req.params.id is:", req.params.id);
 
-    // Validate ObjectId
     if (!ObjectId.isValid(req.params.id)) {
       return res
         .status(400)
         .json({ message: "Invalid employer ID format on put" });
     }
 
-    // Update the user profile
     const employerId = new ObjectId(req.params.id);
-    const updateData = req.body; // Data from the request body
+    const updateData = req.body;
 
-    // Remove any properties that shouldn't be updated (e.g., _id)
     delete updateData._id;
     console.log("the update data is:", updateData);
     console.log("the update id is:", employerId);
@@ -689,7 +652,7 @@ app.put("/reviews/:reviewId", async (req, res) => {
     const updatedReview = await collection.findOneAndUpdate(
       { _id: new ObjectId(reviewId) },
       { $set: { response } },
-      { returnDocument: "after" } // Return the updated document
+      { returnDocument: "after" }
     );
 
     connection.close();

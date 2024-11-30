@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -66,8 +66,8 @@ function EmployerModal() {
         onSubmit: async (values) => {
             try {
                 if (id) {
-                    const employer = await axios.put(`http://localhost:3000/employer/${id}`, values)
-                    setemployers(employer.data)
+                    const response = await axios.put(`http://localhost:3000/employer/${id}`, values)
+                    setemployers(response.data)
                     navigate(`/employerProfile/${id}`)
                 } else {
                     const regiterData = await axios.post("http://localhost:3000/employer", values);
@@ -84,6 +84,8 @@ function EmployerModal() {
         if (id) {
             try {
                 const response = await axios.get(`http://localhost:3000/employer/${id}`)
+                console.log("thresponse after usermodal edited from back end is:", response.data);
+
                 formik.setValues(response.data)
             } catch (error) {
                 alert("Failed to fetch character data")
@@ -97,6 +99,7 @@ function EmployerModal() {
     }, [id]);
 
     return (
+
         <div className="modal" style={{ display: "block" }}>
             <div className="modal-dialog" role='document'>
                 <div className="modal-content" style={{ width: "500px" }}>
@@ -173,6 +176,7 @@ function EmployerModal() {
                 </div>
             </div>
         </div>
+
     )
 }
 
