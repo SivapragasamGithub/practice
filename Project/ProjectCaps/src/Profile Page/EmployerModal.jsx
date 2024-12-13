@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -66,14 +66,16 @@ function EmployerModal() {
         onSubmit: async (values) => {
             try {
                 if (id) {
-                    const response = await axios.put(`http://localhost:3000/employer/${id}`, values)
+                    const response = await axios.put(`https://project-backend-vdkg.onrender.com/employer/${id}`, values)
                     setemployers(response.data)
                     navigate(`/employerProfile/${id}`)
                 } else {
-                    const regiterData = await axios.post("http://localhost:3000/employer", values);
+                    const regiterData = await axios.post("https://project-backend-vdkg.onrender.com/employer", values);
                     console.log("The register Data while model submit:", regiterData);
                     const _id = regiterData.data._id
-                    navigate(`/employerProfile/${_id}`)
+                    // navigate(`/employerProfile/${_id}`)
+                    navigate("/login")
+
                 }
             } catch (error) {
                 alert("Something went wrong");
@@ -83,7 +85,7 @@ function EmployerModal() {
     const fetchemployerdata = async () => {
         if (id) {
             try {
-                const response = await axios.get(`http://localhost:3000/employer/${id}`)
+                const response = await axios.get(`https://project-backend-vdkg.onrender.com/employer/${id}`)
                 console.log("thresponse after usermodal edited from back end is:", response.data);
 
                 formik.setValues(response.data)

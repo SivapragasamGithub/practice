@@ -17,6 +17,7 @@ import employersContext, { EmployersProvider } from "./EmployersContext"
 import EmployerProfile from "./Profile Page/EmployerProfile"
 function App() {
   const { candidat } = useContext(userContext);
+
   const { employer } = useContext(employersContext);
   const [filteredCandidates, setFilteredCandidates] = useState([]);
   const [filteredemployers, setfilteredemployers] = useState([]);
@@ -38,12 +39,13 @@ function App() {
       return skillsMatch || nameMatch;
     });
     setFilteredCandidates(results);
-    
+
+
   };
   const handleemployerSearch = (query) => {
     const results = employer.filter((employers) => {
-      const skillsArray = typeof employers.skills === "string"
-        ? employers.skills.split(",").map((skill) => skill.trim().toLowerCase())
+      const skillsArray = typeof employers.skillsneeded === "string"
+        ? employers.skillsneeded.split(",").map((skill) => skill.trim().toLowerCase())
         : [];
 
       const skillsMatch = skillsArray.some((skill) =>
@@ -57,7 +59,8 @@ function App() {
       return skillsMatch || nameMatch;
     });
     setfilteredemployers(results);
-  };
+
+  }
   return (
     <>
 

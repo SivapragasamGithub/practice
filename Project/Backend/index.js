@@ -30,7 +30,7 @@ const SECRET_KEY =
 //Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://incredible-boba-b3094a.netlify.app",
   })
 );
 app.use(express.json());
@@ -51,21 +51,13 @@ app.post("/user", async (req, res) => {
     const db = connection.db("marketplace");
     //3.select the collection
     const collection = db.collection("candidates");
-    console.log("the requ.body while receiving for model saving:", req.body);
     //do the operation
     const result = await collection.insertOne(req.body);
     const createdUser = await collection.findOne({ _id: result.insertedId });
-    console.log("the created user while model saving:", createdUser);
-    console.log("the result while model saving:", result);
-    console.log("the result ID is while model saving:", result.insertedId);
-
     //close the collection
     connection.close();
     res.json({ createdUser, _id: result.insertedId });
-    // res.json({
-    //   message: "Profile created succesfully",
-    //   id: result.insertedId,
-    // });
+  
   } catch (error) {
     console.log(error);
 
@@ -85,8 +77,6 @@ app.put("/user/:id", async (req, res) => {
     // Select the database and collection
     const db = connection.db("marketplace");
     const collection = db.collection("candidates");
-    console.log("the req.params.id is:", req.params.id);
-
     // Validate ObjectId
     if (!ObjectId.isValid(req.params.id)) {
       return res.status(400).json({ message: "Invalid User ID format on put" });
@@ -97,14 +87,10 @@ app.put("/user/:id", async (req, res) => {
     const updateData = req.body;
     // Remove any properties that not be updated
     delete updateData._id;
-    console.log("the update data is:", updateData);
-    console.log("the update id is:", userId);
     const result = await collection.findOneAndUpdate(
       { _id: userId },
       { $set: updateData }
     );
-    console.log("the result is:", result);
-
     // Check if a document was modified
     if (result.modifiedCount === 0) {
       return res
@@ -113,7 +99,6 @@ app.put("/user/:id", async (req, res) => {
     }
     // Fetch the updated user to return
     const updatedUser = await collection.findOne({ _id: userId });
-    console.log("the updateddddd data is:", updatedUser);
 
     res.json({
       message: "User profile updated successfully",
@@ -149,7 +134,6 @@ app.get("/user/:id", async (req, res) => {
       return res.status(400).json({ message: "Invalid User ID format on get" });
     }
 
-    console.log("Fetching user with ID:", req.params.id);
     const userId = new ObjectId(req.params.id);
     const updateData = req.body;
     // Convert the string ID to ObjectId for querying
@@ -443,6 +427,8 @@ app.get("/employers", async (req, res) => {
     //3.select the collection
 
     const collection = db.collection("employer");
+    // console.log("The log is:", collection);
+
     //do the operation
     const employers = await collection.find({}).toArray();
     // console.log(users);

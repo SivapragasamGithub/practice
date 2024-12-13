@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar({ onSearch }) {
+function Navbar({ onSearch, onemployersearch }) {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [query, setQuery] = useState("");
     const [searchType, setSearchType] = useState("candidates"); // Default search for candidates
+    const [employersearchType, setemployerSearchType] = useState("employers"); // Default search for 
     const navigate = useNavigate();
+
 
     const userId = localStorage.getItem("userId");
     const userType = localStorage.getItem("userType");
@@ -27,6 +29,9 @@ function Navbar({ onSearch }) {
         if (onSearch) {
             onSearch(query, searchType);
         }
+        if (onemployersearch) {
+            onemployersearch(query, employersearchType)
+        }
     };
 
     const handleProfile = () => {
@@ -38,6 +43,7 @@ function Navbar({ onSearch }) {
             alert("User type not identified. Please log in again.");
         }
     };
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary rounded">
             <div className="container-fluid">
@@ -68,17 +74,8 @@ function Navbar({ onSearch }) {
                             </Link>
                         </li>
                     </ul>
+
                     <div className="col-lg-3 d-flex align-items-center">
-                        {/* Dropdown for Search Type */}
-                        <select
-                            className="form-select me-2"
-                            value={searchType}
-                            onChange={(e) => setSearchType(e.target.value)}
-                        >
-                            <option value="candidates">Candidates</option>
-                            <option value="employers">Employers</option>
-                        </select>
-                        {/* Search Bar */}
                         <input
                             type="text"
                             className="form-control"
@@ -88,9 +85,10 @@ function Navbar({ onSearch }) {
                                     : "Search employers by company or skills"
                             }
                             value={query}
-                            onChange={handleInputChange}
+                            onChange={(e) => setQuery(e.target.value)}
                         />
                     </div>
+
                     <button className="btn btn-outline-success m-1" onClick={handleSearchClick}>
                         Search
                     </button>
