@@ -2,7 +2,7 @@ import React from 'react';
 
 function Card({ product, onAddToCart }) {
     const name = product.title.length > 21 ? product.title.substring(0, 10) : product.title;
-    const itemDetail = product.description.length > 21 ? product.description.substring(0, 50) + "....." : product.description;
+    const itemDetail = product.description.length > 21 ? product.description.substring(0, 30) + "....." : product.description;
     return (
         <div className='col-lg-4 col-md-6 col-sm-12 mb-4'>
             <div className="card h-100 d-flex flex-column p-3 rounded-3">

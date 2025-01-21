@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
+import userContext from "../UserContext";
 
 function UserCard({ user }) {
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState(0);
     const [comment, setComment] = useState("");
     const [userType, setUserType] = useState("");
+    const { hired, setHired } = useContext(userContext);
     const navigate = useNavigate();
     const { id } = useParams
 
@@ -62,6 +64,14 @@ function UserCard({ user }) {
         }
     };
 
+    const handleApply = () => {
+        const storedHired = JSON.parse(localStorage.getItem("hired")) || [];
+        const updatedHired = [...storedHired, user.name];
+        localStorage.setItem("hired", JSON.stringify(updatedHired));
+        setHired(updatedHired);
+        alert("Hired successfully");
+    };
+
     return (
         <div className="container">
             <div className="m-1">
@@ -89,12 +99,17 @@ function UserCard({ user }) {
                                     </ul>
                                 </div>
                             </div>
-                            <a href="#" className="btn btn-primary m-3">
+                            <button className="btn btn-primary" onClick={handleApply}>
                                 Hire
-                            </a>
+                            </button>
                             {/* <button className="btn btn-primary m-3" onClick={navigate(`/Profile/${user._id}`)} >
                                 View
                             </button> */}
+                            <p>
+                                <strong>Hired:</strong>{" "}
+                                {Array.isArray(hired) && hired.length > 0 ? hired.join(", ") : "None"}
+                            </p>
+
                         </div>
                     </div>
                     <div className="card-footer text-body-secondary text-start">

@@ -14,7 +14,6 @@ function CartPage() {
 
                         <div>
                             {
-
                                 cart.map(item => (
                                     <div key={item.id} className="d-flex justify-content-between align-items-center" >
                                         <div>

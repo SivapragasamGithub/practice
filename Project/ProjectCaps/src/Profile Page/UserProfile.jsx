@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 
 function UserProfile() {
-  const { candidat } = useContext(userContext);
+  const { candidat, appliedCompany, setAppliedCompany } = useContext(userContext);
   const { id } = useParams();
   const [userDetail, setUserDetail] = useState(null);
   const [reviews, setReviews] = useState([]);
@@ -86,6 +86,15 @@ function UserProfile() {
             </div>
             <div className="row g-1">
               <div className="col-md-4 mt-8">
+                <p>
+                  <strong>Applied Company:</strong>{" "}
+                  {Array.isArray(appliedCompany) && appliedCompany.length > 0
+                    ? appliedCompany.join(", ")
+                    : "None"}
+                </p>
+
+                <br />
+                <br />
                 <img
                   src={userDetail.photo}
                   className="img-fluid rounded-start"
